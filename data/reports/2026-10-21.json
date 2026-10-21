@@ -1,0 +1,174 @@
+{
+  "date": "2026-10-21",
+  "since": "2026-10-20T07:38:30.057365+00:00",
+  "summary": null,
+  "note": "AI summary skipped: ANTHROPIC_API_KEY is not set.",
+  "changelog": [
+    {
+      "title": "Bulk migrate branch protections to rulesets for a repository",
+      "url": "https://github.blog/changelog/2026-10-20-bulk-migrate-branch-protections-to-rulesets-for-a-repository",
+      "published": "2026-10-20T18:06:21+00:00",
+      "labels": [],
+      "text": "You can now convert all branch protection rules of a repository to rulesets in a single action. This is an extension of the ability to convert a single branch protection rule to a ruleset that we released previously, now allowing for at-scale conversions. How it works Navigate to Settings \u2192 Rulesets in your repository and click Import branch protection rules . In the Review import dialog, you can: Preview the rulesets that will be created before you confirm the conversion. See which branch protection rules are already covered by an existing ruleset. Review cases where one branch protection rule produces multiple rulesets to preserve its original behavior. Choose an enforcement status (e.g., Active , Evaluate , or Disabled ) and select which rulesets to create. After you click Create rulesets , choose whether to keep or delete the original branch protection rules. Why migrate to rulesets? Rulesets offer several advantages over classic branch protections: Apply rules across multiple branches with pattern matching Layer multiple rulesets for granular policy control Manage rulesets at the organization or enterprise level Configure fine-grained bypass permissions for users, teams, and apps Availability This feature is available for all repositories where rulesets are available. Learn more about converting your branch protections to repository rulesets . Join the discussion within GitHub Community . The post Bulk migrate branch protections to rulesets for a repository appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Updates to GitHub secret scanning",
+      "url": "https://github.blog/changelog/2026-10-20-updates-to-github-secret-scanning",
+      "published": "2026-10-20T18:03:55+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "This update covers improvements and bug fixes for GitHub secret scanning. Update to audit log events On November 12, 2026 , the business field in affected secret_scanning_alert.* and secret_scanning_push_protection.bypass audit log events will change from the enterprise display name to the enterprise slug . To avoid disruption to any automated workflows, you should update integrations that filter by display name before rollout to accept both formats or use business_id instead. The business field remains a string. Event names and numeric business_id values are unchanged. Recent improvements and bug fixes Custom pattern alerts: Existing open alerts stay open when a rescan finds that they still match an edited custom pattern, rather than being closed and reopened. Base64-encoded GitHub tokens: In private and internal repositories on github.com with secret scanning enabled, the existing revocation action (public preview) now supports encoded personal access tokens (classic), fine-grained personal access tokens, OAuth access tokens, and GitHub App user access tokens. GitHub automatically decodes the value. Dismissal-request webhooks: Payloads now include exemption_request.number , the repository-scoped request number also available in the REST API. Use the repository and request number together to correlate requests across integrations. Accessibility: The Request pending status on an alert is now keyboard-focusable without activating an action. The revocation flow announces progress to screen readers and moves focus to its completion panel when that panel appears. Bypass-request metadata: Fixed empty secret-type and location details in bypass-request API responses and webhook payloads for command-line pushes when another repository rule ran after secret scanning. Delegated bypass: Fixed push failures caused by existing organization-role entries in reviewer lists, and 500 errors when setting valid reviewer configurations for organization-owned repositories through the REST API. Custom pattern API: Requests rejected by the scanning service for invalid arguments now return 422 instead of 500 , so your integration can distinguish these input errors from server failures. Learn more Learn more about enterprise audit log events and the secret scanning REST API . Share your feedback in GitHub Community . The post Updates to GitHub secret scanning appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Dependabot alerts REST API now includes dependency versions",
+      "url": "https://github.blog/changelog/2026-10-20-dependabot-alerts-rest-api-now-includes-dependency-versions",
+      "published": "2026-10-20T17:13:40+00:00",
+      "labels": [
+        "supply-chain-security"
+      ],
+      "text": "You can now get the version of a vulnerable dependency directly from Dependabot alert responses in the REST API. Each alert\u2019s dependency object includes a new version_requirement field with the version or version constraint that Dependabot last recorded for the alert. Alert responses already included the advisory\u2019s vulnerable version range, but not the version in your repository. If you sync alerts to other security tools, you no longer need to parse lockfiles or make a separate GraphQL request for vulnerableRequirements to get that version. The value depends on how Dependabot detected the dependency: Lockfiles: The resolved version. Manifests without a lockfile: The version or version constraint declared in the manifest. Dependency submission API: The resolved version submitted by your build tooling. The field is null when no value is available. If an alert covers more than one vulnerable version of a dependency, the field holds one recorded value and may not represent all of them. Long version constraints may also be truncated. You\u2019ll find version_requirement in responses for individual alerts, in repository, organization, and enterprise alert lists, and in dependabot_alert webhook payloads. This field is available now on github.com and GitHub Enterprise Cloud with data residency, and will be included in GitHub Enterprise Server 3.24. Learn more about the REST API endpoints for Dependabot alerts and the dependabot_alert webhook event . The post Dependabot alerts REST API now includes dependency versions appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "GitHub package firewall in public preview",
+      "url": "https://github.blog/changelog/2026-10-20-github-package-firewall-in-public-preview",
+      "published": "2026-10-20T16:11:53+00:00",
+      "labels": [
+        "supply-chain-security"
+      ],
+      "text": "An increasing number of malware attacks exploit systems at package installation time, harvesting credentials on CI/CD hosts or developer workstations without even running the package\u2019s code. To stem this tide of attacks, GitHub is introducing a new package firewall capability. The package firewall sits between endpoints like Actions runners or coding agents and the upstream package repositories, inspecting both metadata requests and package downloads for signs of malicious activity. The package firewall is available today in public preview for all GitHub Enterprise Cloud customers, including data-resident GitHub Enterprise Cloud. How it works First, administrators set policy controls for their enterprise. The controls available today include a configurable cooldown period, checking the GitHub Advisory Database for malware or vulnerability alerts, and supply-chain checks like attestation downgrades. Then endpoints like coding agents and CI/CD hosts need configuration to use the firewall for their requests instead of pointing directly at the upstream package registries. Metadata requests for package lists as well as the actual package downloads then flow through the firewall, which evaluates them against the policy. If a package is blocked erroneously, the user can request an exception with a workflow similar to other GitHub Advanced Security features. Availability and limitations The package firewall is available in public preview as we scale up the infrastructure behind it and continue to add features based on customer demand. It is available to GitHub Enterprise Cloud customers, including GitHub Enterprise Cloud with data residency. The service is free while in the preview period. When it reaches general availability, it will be charged based on metered usage, similar to Actions billing. Currently the package firewall only supports npm packages. How to use it For detailed setup instructions, see Protecting endpoints with package firewall . Join the discussion in GitHub Community . The post GitHub package firewall in public preview appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Dependabot now supports npm 12, pnpm 11 and 12, and Bun 1.4",
+      "url": "https://github.blog/changelog/2026-10-20-dependabot-now-supports-npm-12-pnpm-11-and-12-and-bun-1-4",
+      "published": "2026-10-20T13:52:38+00:00",
+      "labels": [
+        "supply-chain-security"
+      ],
+      "text": "You can now upgrade your projects to npm 12, pnpm 11 or 12, or Bun 1.4 and keep receiving Dependabot updates. Support for these package manager versions is available to all github.com users and will be included in GitHub Enterprise Server 3.24. For the full list of package manager versions that Dependabot supports, see Dependabot supported ecosystems and repositories . The post Dependabot now supports npm 12, pnpm 11 and 12, and Bun 1.4 appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "4dc0b8276c24e2e24fe45b1bde0747c5da3cce10",
+      "title": "Copilot IA: concepts customizations category (#63578)",
+      "url": "https://github.com/github/docs/commit/4dc0b8276c24e2e24fe45b1bde0747c5da3cce10",
+      "date": "2026-10-20T16:30:53Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/secret-security/push-protection-and-the-github-mcp-server.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/push-protection-and-the-github-mcp-server",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -33,5 +33,5 @@ To resolve the block, you can either:\n ## Further reading\n \n * [AUTOTITLE](/code-security/concepts/secret-security/push-protection)\n-* [About the {% data variables.product.github %} MCP server](/copilot/concepts/context/mcp#about-the-github-mcp-server)\n+* [About the {% data variables.product.github %} MCP server](/copilot/concepts/customizations/mcp#about-the-github-mcp-server)\n * [AUTOTITLE](/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server)"
+        },
+        {
+          "path": "content/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -143,6 +143,6 @@ If push protection is enabled, the MCP server also blocks secrets from being inc\n |---|---|\n | Scanning returns no results | Verify the `secret_protection` toolset is enabled in your MCP configuration. |\n | Repository not eligible |{% data variables.product.prodname_secret_scanning_caps %} via MCP is available to public repositories and requires {% data variables.product.prodname_GH_secret_protection %} to be enabled for private and internal repositories. |\n-| Agent doesn't recognize the tool | Confirm your IDE or agent supports MCP. See [AUTOTITLE](/copilot/concepts/context/mcp#availability). |\n+| Agent doesn't recognize the tool | Confirm your IDE or agent supports MCP. See [AUTOTITLE](/copilot/concepts/customizations/mcp#where-you-can-use-mcp). |\n | Unexpected detection results | Your organization's security configuration controls which patterns are scanned. Check your repository security settings. |\n | Tool works in one client but not another | The experience varies across MCP-compatible clients. Check your client's MCP documentation for supported features. |"
+        }
+      ]
+    },
+    {
+      "sha": "3345e43fa2590df66258d63f384a3c0529aec516",
+      "title": "Use the full Description paragraph for CodeQL CLI intros (#64065)",
+      "url": "https://github.com/github/docs/commit/3345e43fa2590df66258d63f384a3c0529aec516",
+      "date": "2026-10-20T16:29:09Z",
+      "files": [
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/generate-overlay-changes.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/generate-overlay-changes",
+          "additions": 3,
+          "deletions": 1,
+          "patch": "@@ -1,7 +1,9 @@\n ---\n title: generate overlay-changes\n-intro: |\n+intro: |-\n   [Plumbing] Generate a file that can be used for the\n+  --overlay-changes option to\n+  codeql database create when extracting an overlay database.\n versions: # DO NOT MANUALLY EDIT. CHANGES WILL BE OVERWRITTEN BY A \ud83e\udd16\n   fpt: '*'\n   ghec: '*'"
+        }
+      ]
+    },
+    {
+      "sha": "1054b782080575b8363b931cb8e30315856204ae",
+      "title": "Revert the firewall URLs for package firewall. (#64298)",
+      "url": "https://github.com/github/docs/commit/1054b782080575b8363b931cb8e30315856204ae",
+      "date": "2026-10-20T16:15:50Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/protecting-endpoints-with-package-firewall",
+          "additions": 5,
+          "deletions": 5,
+          "patch": "@@ -69,17 +69,17 @@ Use your user-level `.npmrc` file to configure npm. In the examples, replace `EN\n 1. Add the following configuration to your user-level `.npmrc` file:\n \n    ```text\n-   registry=https://package-firewall.github.com/npm/enterprises/ENTERPRISE\n-   //package-firewall.github.com/npm/enterprises/ENTERPRISE/:_authToken=${GITHUB_TOKEN}\n+   registry=https://package-firewall.githubapp.com/npm/enterprises/ENTERPRISE\n+   //package-firewall.githubapp.com/npm/enterprises/ENTERPRISE/:_authToken=${GITHUB_TOKEN}\n    ```\n \n Alternatively, configure the same settings from the command line:\n \n ```shell\n npm config set registry \\\n-  https://package-firewall.github.com/npm/enterprises/ENTERPRISE\n+  https://package-firewall.githubapp.com/npm/enterprises/ENTERPRISE\n npm config set \\\n-  '//package-firewall.github.com/npm/enterprises/ENTERPRISE/:_authToken=${GITHUB_TOKEN}'\n+  '//package-firewall.githubapp.com/npm/enterprises/ENTERPRISE/:_authToken=${GITHUB_TOKEN}'\n ```\n \n ### Configuring Artifactory\n@@ -94,7 +94,7 @@ You must have administrator privileges in your Artifactory instance.\n 1. In Artifactory, click the **Administration** tab, then click **Create a repository**.\n 1. Select **Remote** as the repository type, then select **npm** as the package type.\n 1. In the \"Repository key\" field, type a name such as `gh-package-firewall`.\n-1. In the \"URL\" field, type `https://package-firewall.github.com/npm/enterprises/ENTERPRISE`, replacing `ENTERPRISE` with your enterprise slug.\n+1. "
+        }
+      ]
+    },
+    {
+      "sha": "e06ee0f6cd13bb5b166bda8fe51ac91d74887ce8",
+      "title": "Keep CodeQL CLI option headings with <name@range> in one code span (#64067)",
+      "url": "https://github.com/github/docs/commit/e06ee0f6cd13bb5b166bda8fe51ac91d74887ce8",
+      "date": "2026-10-20T15:39:58Z",
+      "files": [
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-analyze.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-analyze",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -260,7 +260,7 @@ Download any missing queries before analyzing.\n \n ### Options to control the model packs to be used\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-interpret-results.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-interpret-results",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -261,7 +261,7 @@ This overrides the GITHUB\\_TOKEN environment variable.\n \n ### Options to specify which extensions to use when interpreting the results\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-run-queries.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/database-run-queries",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -102,7 +102,7 @@ during database creation from a Code Scanning configuration file.\n \n ### Options to control the model packs to be used\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/execute-queries.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/execute-queries",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -85,7 +85,7 @@ stored in the output location.\n \n ### Options to control the model packs to be used\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/query-run.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/query-run",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -360,7 +360,7 @@ This overrides the GITHUB\\_TOKEN environment variable.\n \n ### Options to control the extension packs\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/resolve-extensions-by-pack.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/resolve-extensions-by-pack",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -87,7 +87,7 @@ value.\n \n (Note: On Windows the path separator is `;`).\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        },
+        {
+          "path": "content/code-security/reference/code-scanning/codeql/codeql-cli-manual/resolve-extensions.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/code-scanning/codeql/codeql-cli-manual/resolve-extensions",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -105,7 +105,7 @@ value.\n \n (Note: On Windows the path separator is `;`).\n \n-#### `--model-packs=<`<name@range>>...\n+#### `--model-packs=<name@range>...`\n \n A list of CodeQL pack names, each with an optional version range, to be\n used as model packs to customize the queries that are about to be"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-10-21T07:38:30.057365+00:00"
+}
