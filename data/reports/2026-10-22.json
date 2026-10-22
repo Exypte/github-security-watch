@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-22",
+  "since": "2026-10-21T08:05:18.057593+00:00",
+  "summary": "### TL;DR\n- **GitHub CLI v2.103.0** adds opt-in, expiring, auto-refreshing OAuth tokens (public preview). A leaked access token becomes unusable within hours instead of lasting indefinitely. GitHub plans to make this the default for new sign-ins in a future release. ([changelog](https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens))\n- **ARM32 (Linux) is gone from the docs** that list supported processor architectures for self-hosted runners. ([docs](https://docs.github.com/en/actions/reference/runners/self-hosted-runners))\n- **Scripts that cache `gh auth token` output** will break once expiring tokens are enabled. Audit them before opting in or before the default changes. ([changelog](https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens))\n\n### Action required\nNo hard deadlines were announced. Two items need attention:\n\n- **Prepare for expiring GitHub CLI tokens becoming the default.** No date has been given.\n  - **What breaks:** anything that runs `gh auth token` once and stores or reuses the value. This includes scripts, extensions, and copying the token into other tools.\n  - **Fix:** read the token fresh each time with `gh auth token`.\n  - **Long-lived token dependencies:** if a workflow depends on a long-lived token, do not opt in for that workflow.\n  - ([changelog](https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens))\n- **Check for ARM32 self-hosted runners.** The docs no longer list `ARM32 - Linux` as a supported architecture. Supported architectures are now:\n  - `x64`: Linux, macOS, Windows\n  - `ARM64`: Linux, macOS, and Windows (Windows in public preview)\n\n  The commit does not include a deprecation notice or date. Teams running ARM32 Linux runners should confirm whether they are still supported. ([docs](https://docs.github.com/en/actions/reference/runners/self-hosted-runners), [commit](https://github.com/github/docs/commit/527f71da381c72fb4d4f0fe64c4eae928d2edaa5))\n\n### Security improvements\n- **Expiring, auto-refreshing OAuth credentials in GitHub CLI (public preview, v2.103.0+).** ([changelog](https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens))\n  - **How it works:** `gh` stores a short-lived access token plus a rotating refresh token, and refreshes them in the background.\n  - **Opting in:**\n    - Per login: `gh auth login --expiring`\n    - For every sign-in: `gh config set expiring_credentials enabled`\n    - To see when the current token expires: `gh auth status`\n  - **Using it with git over HTTPS:**\n    - Run `gh auth setup-git` so `gh` serves and refreshes credentials as the git credential helper.\n    - Upgrade to git 2.46 or newer so expiring credentials are not cached past their lifetime.\n  - **Availability:**\n    - Available on github.com and ghe.com now.\n    - GHES issues these tokens starting with 3.23. On older GHES versions, `gh` falls back to nonexpiring tokens.\n  - **Compatibility:** the feature is opt-in and backward compatible. Existing sign-ins and manually supplied tokens are unaffected.\n\n### Docs changes worth reading\n- **[Self-hosted runners reference](https://docs.github.com/en/actions/reference/runners/self-hosted-runners):** removed `ARM32 - Linux` from the supported processor architectures list. See \"Action required\" above. ([commit](https://github.com/github/docs/commit/527f71da381c72fb4d4f0fe64c4eae928d2edaa5))\n- *Skipped:* the change to [Develop agentic workflows in GitHub Actions](https://docs.github.com/en/actions/tutorials/develop-agentic-workflows-in-github-actions) only renames an internal template variable (`copilot_gemini` to `gemini`). It has no substantive change. ([commit](https://github.com/github/docs/commit/f8f9eb2c2be23dfaf40b33d070704be625d7e873))",
+  "note": null,
+  "changelog": [
+    {
+      "title": "GitHub CLI: Opt in to expiring, auto-refreshing OAuth tokens",
+      "url": "https://github.blog/changelog/2026-10-21-github-cli-opt-in-to-expiring-auto-refreshing-oauth-tokens",
+      "published": "2026-10-21T16:43:23+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "You can now use expiring, automatically refreshing OAuth credentials in GitHub CLI as part of a public preview. When you opt in, gh stores an expiring access token alongside a rotating refresh token and automatically refreshes the token whenever it is needed. You stay authenticated without reauthenticating, and a leaked access token becomes unusable within hours instead of lasting indefinitely. Opting in at login Starting with v2.103.0, pass the new --expiring flag when you log in with gh auth login --expiring . To opt in for every sign-in without passing the flag each time, run gh config set expiring_credentials enabled . From then on, there is nothing new to run day to day: gh refreshes the credential for you in the background. To check the state of an expiring credential, including when the current access token expires, run gh auth status . Using expiring tokens with git If you authenticate to git over HTTPS and want to use expiring tokens, we strongly recommend configuring gh as your git credential helper by running gh auth setup-git . This lets gh serve and refresh the credential for git, so your expiring token is correctly handled. We also strongly recommend upgrading to git 2.46 or newer, which lets gh mark expiring credentials so they are not cached past their lifetime. On older git versions, gh still works but prints a one-time recommendation to upgrade. Good to know It\u2019s opt-in and backward compatible. If you don\u2019t opt in through the flag or configuration setting, nothing changes. Existing sign-ins and manually supplied tokens keep working exactly as before. You get whatever the server issues. --expiring requests refreshable credentials. If a server does not support them, gh falls back cleanly to a normal nonexpiring token. It will become the default over time. Expiring credentials are opt-in today. In a future release, we plan to make them the default for new sign-ins. Things to watch out for Expiring access tokens are short-lived, so anything that captures a token once and reuses it later can break. Scripts and extensions that run gh auth token and store the result, or copy the token into another tool, will eventually be left holding an expired token. If you consume the token outside of gh , read it fresh each time with gh auth token . This refreshes it when needed rather than caching the value. If a workflow depends on a token that stays valid for a long time, hold off on opting in for that workflow. When gh is configured as your git credential helper, it refreshes the credential for you, so git operations over HTTPS keep working. Who can use it Expiring tokens are available on github.com and ghe.com today. GitHub Enterprise Server issues them starting with GHES 3.23. On earlier versions, opting in falls back to today\u2019s nonexpiring behavior. For more on authenticating with GitHub CLI, including expiring tokens, see Authenticating with GitHub CLI . Install or upgrade to GitHub CLI v2.103.0 today to get started. Have feedback or found an issue? Open an issue in the cli/cli repository . The post GitHub CLI: Opt in to expiring, auto-refreshing OAuth tokens appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "527f71da381c72fb4d4f0fe64c4eae928d2edaa5",
+      "title": "Update supported processor architectures section for self-hosted runners (#64317)",
+      "url": "https://github.com/github/docs/commit/527f71da381c72fb4d4f0fe64c4eae928d2edaa5",
+      "date": "2026-10-21T13:27:03Z",
+      "files": [
+        {
+          "path": "content/actions/reference/runners/self-hosted-runners.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/runners/self-hosted-runners",
+          "additions": 0,
+          "deletions": 1,
+          "patch": "@@ -59,7 +59,6 @@ You can use a machine as a self-hosted runner as long as it meets these requirem\n \n * `x64` - Linux, macOS, Windows.\n * `ARM64` - Linux, macOS{% ifversion actions-windows-arm %}, Windows (currently in {% data variables.release-phases.public_preview %}){% endif %}.\n-* `ARM32` - Linux.\n \n ## Routing precedence for self-hosted runners\n "
+        }
+      ]
+    },
+    {
+      "sha": "f8f9eb2c2be23dfaf40b33d070704be625d7e873",
+      "title": "Remove redundant copilot_ prefix from model variables (#64249)",
+      "url": "https://github.com/github/docs/commit/f8f9eb2c2be23dfaf40b33d070704be625d7e873",
+      "date": "2026-10-21T11:48:29Z",
+      "files": [
+        {
+          "path": "content/actions/tutorials/develop-agentic-workflows-in-github-actions.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/tutorials/develop-agentic-workflows-in-github-actions",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -51,7 +51,7 @@ This article walks through a simple setup that adds the agent's credential as a\n | --- | --- | --- |\n | Claude Code | `claude` | `ANTHROPIC_API_KEY` containing an Anthropic API key |\n | {% data variables.product.prodname_openai_codex %} | `codex` | `OPENAI_API_KEY` containing an OpenAI API key |\n-| Google {% data variables.copilot.copilot_gemini %} CLI | `gemini` | `GEMINI_API_KEY` containing a Google AI Studio API key |\n+| Google {% data variables.copilot.gemini %} CLI | `gemini` | `GEMINI_API_KEY` containing a Google AI Studio API key |\n | {% data variables.copilot.copilot_cli_short %} (default) | `copilot` | No secret needed for organization repositories (see below). For personal repositories, `COPILOT_GITHUB_TOKEN` containing a fine-grained {% data variables.product.pat_generic %} with **Copilot Requests** set to **Read**. |\n \n Other engines such as Pi (experimental) are also supported. For the full list, see the [{% data variables.copilot.github_agentic_workflows %} authentication reference](https://github.github.com/gh-aw/reference/auth/)."
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-10-22T07:01:35.465307+00:00"
+}
