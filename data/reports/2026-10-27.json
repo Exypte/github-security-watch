@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-27",
+  "since": "2026-10-26T07:21:57.759008+00:00",
+  "summary": "### TL;DR\n- No GitHub Changelog entries in this period, so there are no announced platform changes, deprecations, or deadlines.\n- The Dependabot docs now say that **NuGet** projects, not just npm, can get security fixes for vulnerable transitive dependencies. ([commit](https://github.com/github/docs/commit/bb241c41f404f748d043aab5349453aea403d9fb))\n- The other docs commit, for the \"Mo's Diner\" landing page, only adds category tags to existing pages. It does not change any guidance. ([commit](https://github.com/github/docs/commit/c68452c1bacd5ff57b238209d8609eb392d3d82d))\n\n### Action required\nNothing this time.\n\n### Security improvements\n- **Dependabot security updates for NuGet transitive dependencies.** This comes from a docs clarification, not a changelog announcement, so it may describe existing behavior rather than a new feature. For NuGet projects that use `PackageReference`, Dependabot handles a vulnerable transitive dependency in two steps:\n  - It first tries to update the parent dependency.\n  - If no compatible parent update exists, it adds a direct reference that pins the transitive dependency to the secure version.\n  \n  .NET teams should expect Dependabot PRs that add new direct `PackageReference` entries. Reviewers should know why those entries appear. ([Dependabot errors reference](https://docs.github.com/en/code-security/reference/supply-chain-security/troubleshoot-dependabot/dependabot-errors), [commit](https://github.com/github/docs/commit/bb241c41f404f748d043aab5349453aea403d9fb))\n\n### Docs changes worth reading\n- **[About Dependabot security updates](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-security-updates)**\n  - **Old text:** Only npm could update a parent dependency, or remove an unneeded sub-dependency, to fix a vulnerable transitive dependency. Other ecosystems could not update a transitive dependency if that required a parent update.\n  - **New text:** The note now says Dependabot can update transitive dependencies, but the method depends on the ecosystem.\n  - The provided diff cuts off before the per-ecosystem details, so check the live page for the full list.\n  - [Commit](https://github.com/github/docs/commit/bb241c41f404f748d043aab5349453aea403d9fb)\n- **[Dependabot errors \u2013 \"tries to update dependencies without an alert\"](https://docs.github.com/en/code-security/reference/supply-chain-security/troubleshoot-dependabot/dependabot-errors)**\n  - The page now describes the NuGet `PackageReference` behavior: try the parent update first, then fall back to pinning the transitive dependency directly.\n  - This helps explain unexpected Dependabot PRs in .NET repositories.\n  - [Commit](https://github.com/github/docs/commit/bb241c41f404f748d043aab5349453aea403d9fb)\n\nThe Mo's Diner commit only added category tags to existing pages, including the Actions [Python build/test tutorial](https://docs.github.com/en/actions/tutorials/build-and-test-code/python) and several code-security pages. It is skipped as a non-substantive change.",
+  "note": null,
+  "changelog": [],
+  "docs": [
+    {
+      "sha": "c68452c1bacd5ff57b238209d8609eb392d3d82d",
+      "title": "Add Mo's Diner bespoke landing page (#63891)",
+      "url": "https://github.com/github/docs/commit/c68452c1bacd5ff57b238209d8609eb392d3d82d",
+      "date": "2026-10-26T21:44:02Z",
+      "files": [
+        {
+          "path": "content/actions/tutorials/build-and-test-code/python.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/tutorials/build-and-test-code/python",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -17,6 +17,7 @@ versions:\n shortTitle: Python\n category:\n   - Build and test code\n+  - Soup - Test your tasks, to taste\n contentType: tutorials\n ---\n "
+        },
+        {
+          "path": "content/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-code-scanning-alerts/resolve-alerts",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -21,6 +21,7 @@ redirect_from:\n contentType: how-tos\n category:\n   - Find and fix code vulnerabilities\n+  - Dessert - Operate your sweet tooth\n ---\n \n {% ifversion copilot-chat-ghas-alerts %}"
+        },
+        {
+          "path": "content/code-security/tutorials/improve-code-quality/catch-issues-before-merge.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/improve-code-quality/catch-issues-before-merge",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -15,6 +15,7 @@ redirect_from:\n   - /code-security/tutorials/improve-code-quality/quickstart\n category:\n   - Improve code quality\n+  - Dessert - Operate your sweet tooth\n ---\n \n ## Introduction"
+        },
+        {
+          "path": "content/code-security/tutorials/improve-code-quality/raise-your-quality-rating.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/improve-code-quality/raise-your-quality-rating",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -13,6 +13,7 @@ redirect_from:\n   - /code-security/tutorials/improve-code-quality/improve-your-codebase\n category:\n   - Improve code quality\n+  - Dessert - Operate your sweet tooth\n ---\n \n ## Introduction"
+        },
+        {
+          "path": "content/code-security/tutorials/secret-protection-adoption-path.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secret-protection-adoption-path",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -12,6 +12,7 @@ contentType: tutorials\n category:\n   - Secure at scale\n   - Protect your secrets\n+  - Dessert - Operate your sweet tooth\n journeyArticlesHeading: 'All secret protection articles'\n journeyTracks:\n   - id: 'assess'"
+        }
+      ]
+    },
+    {
+      "sha": "bb241c41f404f748d043aab5349453aea403d9fb",
+      "title": "Clarify that NuGet (not just npm) supports parent/transitive dependency updates for security fixes (#63639)",
+      "url": "https://github.com/github/docs/commit/bb241c41f404f748d043aab5349453aea403d9fb",
+      "date": "2026-10-26T19:26:12Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/supply-chain-security/dependabot-security-updates.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/dependabot-security-updates",
+          "additions": 7,
+          "deletions": 1,
+          "patch": "@@ -49,7 +49,13 @@ You can add a `dependabot.yml` configuration file to your repository to customiz\n The {% data variables.product.prodname_dependabot_security_updates %} feature is available for repositories where you have enabled the dependency graph and {% data variables.product.prodname_dependabot_alerts %}. You will see a {% data variables.product.prodname_dependabot %} alert for every vulnerable dependency identified in your full dependency graph. However, security updates are triggered only for dependencies that are specified in a manifest or lock file. For more information, see [AUTOTITLE](/code-security/concepts/supply-chain-security/dependency-graph).\n \n > [!NOTE]\n-> For npm, {% data variables.product.prodname_dependabot %} will raise a pull request to update an explicitly defined dependency to a secure version, even if it means updating the parent dependency or dependencies, or even removing a sub-dependency that is no longer needed by the parent. For other ecosystems, {% data variables.product.prodname_dependabot %} is unable to update an indirect or transitive dependency if it would also require an update to the parent dependency. For more information, see [AUTOTITLE](/code-security/reference/supply-chain-security/troubleshoot-dependabot/dependabot-errors#updates-dependencies-without-an-alert).\n+> {% data variables.product.prodname_dependabot %} can update an indirect (transitive) dependency to a secure version, but how it does so depends on your ecosystem:\n+>\n+>"
+        },
+        {
+          "path": "content/code-security/reference/supply-chain-security/troubleshoot-dependabot/dependabot-errors.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/supply-chain-security/troubleshoot-dependabot/dependabot-errors",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -70,7 +70,7 @@ Every application that has dependencies has a dependency graph, that is, a direc\n \n **Error message:** `{% data variables.product.prodname_dependabot %} tries to update dependencies without an alert`\n \n-{% data variables.product.prodname_dependabot %} updates explicitly defined transitive dependencies that are vulnerable for all ecosystems. For npm, {% data variables.product.prodname_dependabot %} will raise a pull request that also updates the parent dependency if it's the only way to fix the transitive dependency.\n+{% data variables.product.prodname_dependabot %} updates explicitly defined transitive dependencies that are vulnerable for all ecosystems. For npm, {% data variables.product.prodname_dependabot %} will raise a pull request that also updates the parent dependency if it's the only way to fix the transitive dependency. For NuGet projects that use `PackageReference`, {% data variables.product.prodname_dependabot %} first tries to update the parent dependency. If no compatible parent update is available, it adds a direct reference that pins the transitive dependency to the secure version.\n \n For example, a project with a dependency on `A` version `~2.0.0` which has a transitive dependency on `B` version `~1.0.0` which has resolved to `1.0.1`.\n "
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-10-27T07:13:37.428324+00:00"
+}
