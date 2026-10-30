@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-30",
+  "since": "2026-10-29T07:57:15.635314+00:00",
+  "summary": "### TL;DR\n- No GitHub Changelog entries were published in this period.\n- The only docs change is a cosmetic heading fix (`etc/hosts` \u2192 `/etc/hosts`) on the [GitHub-hosted runners page](https://docs.github.com/en/actions/concepts/runners/github-hosted-runners) ([commit](https://github.com/github/docs/commit/f63f0ee89415a24961bea1e58f2c67c727333b08)). It doesn't change any behavior or guidance.\n- Teams using GitHub Actions don't need to do anything.\n\n### Action required\nNothing this time.\n\n### Security improvements\nNo new or changed security capabilities were announced in this period.\n\n### Docs changes worth reading\nNo substantive documentation changes this time. The single update only corrects a section heading to use the absolute path `/etc/hosts` on the [GitHub-hosted runners page](https://docs.github.com/en/actions/concepts/runners/github-hosted-runners) ([commit](https://github.com/github/docs/commit/f63f0ee89415a24961bea1e58f2c67c727333b08)). The section's content was not modified.",
+  "note": null,
+  "changelog": [],
+  "docs": [
+    {
+      "sha": "f63f0ee89415a24961bea1e58f2c67c727333b08",
+      "title": "Use absolute path for /etc/hosts for clarity (#46608)",
+      "url": "https://github.com/github/docs/commit/f63f0ee89415a24961bea1e58f2c67c727333b08",
+      "date": "2026-10-30T07:53:29Z",
+      "files": [
+        {
+          "path": "content/actions/concepts/runners/github-hosted-runners.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/concepts/runners/github-hosted-runners",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -116,7 +116,7 @@ If your workflows depend on network allowlists or Azure SDK credentials, running\n \n In addition, if the workflow run has been successfully queued, but has not been processed by a {% data variables.product.prodname_dotcom %}-hosted runner within 45 minutes, then the queued workflow run is discarded.\n \n-## The `etc/hosts` file\n+## The `/etc/hosts` file\n \n {% data reusables.actions.runners-etc-hosts-file %}\n "
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-10-30T07:59:46.460165+00:00"
+}
