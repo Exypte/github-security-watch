@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-31",
+  "since": "2026-10-30T07:59:46.460165+00:00",
+  "summary": "### TL;DR\n- No GitHub Changelog entries in this period. All items below are documentation updates, not new platform changes.\n- **Cost risk:** In an organization security configuration, setting \"Prevent direct alert dismissals\" (in the Code scanning section) to **Not set** automatically switches paid Code Security to **Enabled**. ([source](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage))\n- License compliance checks wait for a dependency snapshot on the PR head commit from every detector that submitted one for the base commit. Workflows that submit snapshots only for the default branch leave the check stuck at `Waiting for dependency snapshots on head`. ([source](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies))\n- ARC `dind-rootless` runners can fail to start the Docker daemon on Ubuntu 24.04+ nodes because of restrictions on unprivileged user namespaces. ([source](https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets))\n\n### Action required\nNothing this time.\n\nNone of the provided data includes deprecations, breaking changes, or deadlines. The doc warnings below may still call for configuration reviews.\n\n### Security improvements\nNo new or changed security capabilities were announced in this period.\n\n### Docs changes worth reading\n- **Avoiding accidental Code Security enablement:** [Managing your GitHub Advanced Security license usage](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage) ([commit](https://github.com/github/docs/commit/234a5ac7b987b09a895931745beb34ab5a028197))\n  - To keep Code Security disabled, set both \"Default setup\" and \"Prevent direct alert dismissals\" in the Code scanning section to **Disabled**.\n  - The new warning says that changing \"Prevent direct alert dismissals\" to **Not set** auto-enables Code Security. Recheck the top-level setting before saving and applying the configuration.\n  - Dependency graph and Dependabot alerts can stay enabled because they are included in all plans.\n  - The tip to give \"No Code Security\" configurations a clear name is now regular guidance rather than a callout.\n\n- **License compliance and dependency snapshots:** [Open source license compliance](https://docs.github.com/en/code-security/concepts/supply-chain-security/open-source-license-compliance) and [Configure license policies](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies) ([commit](https://github.com/github/docs/commit/7789d8b90cca3ee60ccfb43329b81e42c836d7d8))\n  - **How the check works:** It compares snapshots for the base and head commits to find added dependencies. For each detector that submitted a snapshot for the base commit, it waits for a snapshot from that same detector for the exact head commit.\n  - **Troubleshooting:** If you submit snapshots through your own workflow or the Dependency submission API, configure it to also submit for the PR head commit.\n  - **Automatic dependency submission:** It runs on both base and head commits. If it already covers your repository's needs, don't add another detector, because that can increase the number of snapshots the check expects on the head commit.\n\n- **ARC rootless Docker-in-Docker on Ubuntu 24.04+:** [Deploying runner scale sets](https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets) ([commit](https://github.com/github/docs/commit/ce393a97bab49986cd10210335eae3bceef4475e))\n  - A new warning says Ubuntu 24.04+ restrictions on unprivileged user namespaces can stop RootlessKit from starting the Docker daemon in the `dind` container.\n  - Before using `dind-rootless`, review Docker's distribution-specific troubleshooting guidance with your cluster administrator.\n\n- **Dependabot security update scope correction:** [About the dependabot.yml file](https://docs.github.com/en/code-security/concepts/supply-chain-security/about-the-dependabot-yml-file) ([commit](https://github.com/github/docs/commit/33b1f4a6fec2d9b6fd3d374afa56bcd9f0875b57))\n  - \"Define target branches for security updates\" was removed from the list of what `dependabot.yml` controls for security updates. The commit title describes this as correcting the security update scope.\n  - If you rely on target-branch settings to steer security updates, verify that behavior.",
+  "note": null,
+  "changelog": [],
+  "docs": [
+    {
+      "sha": "33b1f4a6fec2d9b6fd3d374afa56bcd9f0875b57",
+      "title": "docs(dependabot): correct security update scope (#46758)",
+      "url": "https://github.com/github/docs/commit/33b1f4a6fec2d9b6fd3d374afa56bcd9f0875b57",
+      "date": "2026-10-31T07:47:08Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/supply-chain-security/about-the-dependabot-yml-file.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/about-the-dependabot-yml-file",
+          "additions": 0,
+          "deletions": 1,
+          "patch": "@@ -37,7 +37,6 @@ The `dependabot.yml` file controls how {% data variables.product.prodname_depend\n ### For security updates\n \n * Customize security update pull requests with labels, assignees, and reviewers\n-* Define target branches for security updates\n * Configure private registry authentication\n * Set limits on open pull requests\n "
+        }
+      ]
+    },
+    {
+      "sha": "7789d8b90cca3ee60ccfb43329b81e42c836d7d8",
+      "title": "Clarify license compliance snapshot requirements (#64481)",
+      "url": "https://github.com/github/docs/commit/7789d8b90cca3ee60ccfb43329b81e42c836d7d8",
+      "date": "2026-10-30T19:47:05Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/supply-chain-security/open-source-license-compliance.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/supply-chain-security/open-source-license-compliance",
+          "additions": 8,
+          "deletions": 0,
+          "patch": "@@ -36,6 +36,14 @@ If there is a ruleset in **Active** mode which uses the \"Requires license compli\n \n Additionally, a [branch protection rule](/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule) that requires comment resolution before merging will track annotations from license checks, so even alerts generated by **Evaluate** rulesets will be subject to the protection.\n \n+### Dependency snapshots\n+\n+Dependency snapshots describe a repository's dependencies at a specific commit. License compliance compares snapshots for the base and head commits of a pull request to identify added dependencies and evaluate their licenses against your policy.\n+\n+For each detector that submitted a snapshot for the base commit, the check waits for a snapshot from that detector for the exact head commit. The check resumes when all required snapshots arrive. For example, if a workflow or external system submits snapshots only for commits to the default branch, the head commit does not receive that detector's snapshot and the check remains waiting.\n+\n+Automatic dependency submission runs on both the base and head commits. When it submits the snapshots your repository needs, you do not need to add another detector. For more information about automatic dependency submission, see [AUTOTITLE](/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/submit-dependencies-automatically).\n+\n ## Where results appear\n "
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-license-policies",
+          "additions": 8,
+          "deletions": 0,
+          "patch": "@@ -106,6 +106,14 @@ For more information about rulesets, see [AUTOTITLE](/repositories/configuring-b\n \n If the ruleset is in **Active** mode, the pull request remains blocked until all license policy violations are resolved.\n \n+## Troubleshooting checks waiting for dependency snapshots\n+\n+If a license compliance check reports `Waiting for dependency snapshots on head`, the pull request's head commit is missing one or more snapshots that were submitted for the base commit. This can happen when a workflow submits snapshots for the base branch but does not submit them for the pull request's head commit.\n+\n+The message can list detectors that submitted a snapshot for the base commit but not yet for the head commit. Review those detectors and the workflows or external systems that submit their snapshots. If you submit snapshots through your own workflow or the {% data variables.dependency-submission-api.name %}, configure it to also submit snapshots for the pull request's head commit. If automatic dependency submission is enabled and already submits the snapshots your repository needs, you do not need to add another detector. Adding another detector can increase the number of snapshots the check expects on the head commit.\n+\n+For more information about snapshot submission, see [AUTOTITLE](/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/use-dependency-submission-api).\n+\n ## Managing license compliance requests and policy\n \n ### Review and handle exception "
+        }
+      ]
+    },
+    {
+      "sha": "ce393a97bab49986cd10210335eae3bceef4475e",
+      "title": "Warn about Ubuntu user namespace restrictions with rootless dind (#64422)",
+      "url": "https://github.com/github/docs/commit/ce393a97bab49986cd10210335eae3bceef4475e",
+      "date": "2026-10-30T12:16:26Z",
+      "files": [
+        {
+          "path": "content/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/manage-runners/use-actions-runner-controller/deploy-runner-scale-sets",
+          "additions": 4,
+          "deletions": 0,
+          "patch": "@@ -664,6 +664,10 @@ To customize the spec, comment out or remove `containerMode`, and append the con\n #### Example: running `dind-rootless`\n \n Before deciding to run `dind-rootless`, make sure you are aware of [known limitations](https://docs.docker.com/engine/security/rootless/#known-limitations).\n+\n+> [!WARNING]\n+> On Kubernetes nodes running Ubuntu 24.04 and later, restrictions on unprivileged user namespaces can prevent RootlessKit from starting the Docker daemon in the `dind` container. Before using this configuration, see [Troubleshooting](https://docs.docker.com/engine/security/rootless/troubleshoot/#distribution-specific-hint) in the Docker documentation and review the Ubuntu-specific guidance with your cluster administrator.\n+\n {% ifversion not ghes %}\n \n For versions of Kubernetes >= v1.29, sidecar container will be used to run docker daemon."
+        }
+      ]
+    },
+    {
+      "sha": "234a5ac7b987b09a895931745beb34ab5a028197",
+      "title": "Warn about automatic Code Security enablement in security configurations (#64281)",
+      "url": "https://github.com/github/docs/commit/234a5ac7b987b09a895931745beb34ab5a028197",
+      "date": "2026-10-30T12:16:08Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/manage-usage-and-access/managing-your-github-advanced-security-license-usage",
+          "additions": 6,
+          "deletions": 2,
+          "patch": "@@ -42,8 +42,12 @@ Before you can effectively manage your paid use of {% data variables.product.pro\n \n The simplest way to turn off all {% data variables.product.prodname_cs_or_sp %} features for one or more repositories is to create a security configuration where the product is disabled at the top level. You can apply this custom configuration to repositories where you want to turn off paid features.\n \n-> [!TIP]\n-> Ensure that you give your custom configuration a very clear name, for example: \"No Code Security\" or \"Secret Protection and Supply chain only\" to avoid confusion.\n+To keep {% data variables.product.prodname_code_security %} disabled, set \"Default setup\" and \"Prevent direct alert dismissals\" in the \"Code scanning\" section to **Disabled**. You can leave \"Dependency graph\" and \"{% data variables.product.prodname_dependabot_alerts %}\" enabled because they are included in all plans.\n+\n+> [!WARNING]\n+> Changing \"Prevent direct alert dismissals\" in the \"Code scanning\" section to **Not set** automatically switches {% data variables.product.prodname_code_security %} to **Enabled**. To avoid unintentionally enabling paid features, organization administrators must keep \"Default setup\" and \"Prevent direct alert dismissals\" in this section **Disabled** and recheck the top-level {% data variables.product.prodname_code_security %} setting before saving and applying the configuration.\n+\n+Ensure that you give your custom configuration a very clear name, for example: \"No Code Secur"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-10-31T07:56:21.462891+00:00"
+}
