@@ -1,0 +1,94 @@
+{
+  "date": "2026-11-03",
+  "since": "2026-11-02T08:47:52.268200+00:00",
+  "summary": "### TL;DR\n- **`pull_request_target` will be blocked by default in all public repositories starting December 2, 2026.** The original date was November 2, 2026. Brownouts are scheduled for **November 9 and November 16 (16:00\u201318:00 UTC)**. Review the Insights view and update your Actions event policies before November 9. ([source](https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2))\n- Code security and secret risk assessments now show whether findings are in **protected or unprotected repositories**. ([source](https://github.blog/changelog/2026-11-02-security-risk-assessments-include-repository-protection-status))\n- Private vulnerability reports now have documented **rate limits**. Maintainers can change their repository's limit and exempt trusted reporters. ([source](https://github.com/github/docs/commit/424fb583412143b8e8fc8160b82e540ffa1d6cdc))\n\n### Action required\n- **`pull_request_target` blocked by default on December 2, 2026** ([changelog](https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2))\n  - **Scope:** Public repositories on GitHub Free, Team, and Enterprise Cloud. Private and internal repositories and GitHub Enterprise Server are not affected.\n  - **What gets blocked:** `pull_request_target` events are blocked unless an applicable Actions event policy explicitly allows them.\n  - **Current state:** The rule comes from workflow execution protections and is running in evaluate mode. Affected workflows still run but show warnings.\n  - **Brownouts:**\n\n    | Date | Time (UTC) |\n    |---|---|\n    | November 9, 2026 | 16:00\u201318:00 |\n    | November 16, 2026 | 16:00\u201318:00 |\n\n    During these windows, blocked workflows will not execute. Instead, they create failed runs with an error annotation.\n  - **What to do before November 9:**\n    1. Use Insights to find which runs the rule would block.\n    2. Decide, per workflow, whether to keep the block or allow the trigger.\n    3. If a workflow genuinely needs `pull_request_target`, allow it in an Actions event policy. Use workflow file targeting to allow only specific workflows.\n    4. While doing this, audit those workflows for execution of untrusted fork code, since `pull_request_target` has access to base-repository secrets.\n\n### Security improvements\n- **Risk assessments show protection status.** ([changelog](https://github.blog/changelog/2026-11-02-security-risk-assessments-include-repository-protection-status))\n  - Findings are now marked as being in protected or unprotected repositories, which shows where to extend coverage.\n  - Organization admins and security managers start assessments from Security tab \u2192 Assessments.\n  - Available in GitHub Enterprise Cloud and GitHub Team.\n  - The secret risk assessment version comes to GitHub Enterprise Server 3.24.\n- **Rate limits for private vulnerability reports** (documented). ([commit](https://github.com/github/docs/commit/424fb583412143b8e8fc8160b82e540ffa1d6cdc))\n  - Each reporter can submit at most 25 reports per 24 hours across repositories where they are not a trusted reporter.\n  - Each reporter can submit at most 5 reports to a single repository per 24 hours.\n  - By default, a repository accepts at most 10 reports per 24 hours from all reporters combined.\n  - Maintainers can raise or lower their repository's total limit and exempt trusted reporters. Reports from trusted reporters do not count toward that repository's limits or toward the reporter's global limit.\n- **Dependabot supports the APM package manager.** ([commit](https://github.com/github/docs/commit/e755a938bb80e20228732a352ba8c54b4ff90bfd))\n  - The YAML value is `apm`.\n  - APM supports both default-days and SemVer-bump-days `cooldown` settings.\n  - The docs gate this content behind a version flag, so availability may vary by product.\n\n### Docs changes worth reading\n- **[Configure private vulnerability reporting for a repository](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository):** New section explaining the rate limits and the steps to set a custom repository limit or exempt trusted reporters.\n- **[Report a vulnerability privately](https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately):** New section listing the per-reporter and per-repository limits. It also explains that each 24-hour period starts with the first report that counts toward the limit, and that reporters see a message when they hit a limit.\n- **[Dependabot options reference](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference):** APM added to the `cooldown` support table and the package-ecosystem table (`apm`, supported versions \"Not applicable\").\n- **[Interpret code security risk assessment](https://docs.github.com/en/code-security/tutorials/secure-your-organization/interpret-code-security-risk-assessment):**\n  - Metrics now break down vulnerabilities by protected repositories (GitHub Code Security enabled) versus unprotected ones.\n  - The \"Repositories scanned\" table now includes each repository's protection status.\n- **[Interpret secret risk assessment](https://docs.github.com/en/code-security/tutorials/secure-your-organization/interpret-secret-risk-assessment):** Metrics now break down secrets by protected repositories (GitHub Secret Protection enabled) versus unprotected ones.",
+  "note": null,
+  "changelog": [
+    {
+      "title": "Security risk assessments include repository protection status",
+      "url": "https://github.blog/changelog/2026-11-02-security-risk-assessments-include-repository-protection-status",
+      "published": "2026-11-02T15:47:21+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "The GitHub code security risk assessment and secret risk assessment now show whether findings are in protected or unprotected repositories, helping you identify where to extend your security coverage. Organization admins and security managers can start an assessment by going to Assessments under their organization\u2019s Security tab. This improvement is available in GitHub Enterprise Cloud and GitHub Team. It will be available for the secret risk assessment in GitHub Enterprise Server 3.24. Read more in the code security risk assessment documentation and secret risk assessment documentation . The post Security risk assessments include repository protection status appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "pull_request_target blocked by default December 2",
+      "url": "https://github.blog/changelog/2026-11-02-pull_request_target-blocked-by-default-december-2",
+      "published": "2026-11-02T15:14:46+00:00",
+      "labels": [
+        "actions",
+        "application-security"
+      ],
+      "text": "Starting December 2, 2026, GitHub Actions will block pull_request_target events by default in all public repositories, unless an applicable Actions event policy explicitly allows them. Enforcement was previously scheduled for November 2, 2026. GitHub introduced this default rule through workflow execution protections. The rule initially runs in evaluate mode, so you can see which workflow runs it would block before enforcement begins. Private and internal repositories aren\u2019t affected. Why we\u2019re making this change pull_request_target runs in the context of the base repository and can access its secrets. If a workflow executes untrusted code from a fork, that code could compromise your pipeline or steal secrets. The default rule helps reduce this risk while letting you explicitly allow workflows that depend on the trigger. Brownout schedule Before permanent enforcement begins on December 2, 2026, we\u2019ll temporarily enforce the default protection during two scheduled brownouts. These windows will help you identify affected workflows and update your policies before enforcement becomes permanent. Date Time (UTC) November 9, 2026 16:00\u201318:00 November 16, 2026 16:00\u201318:00 During each window, pull_request_target workflow attempts blocked by the default rule in affected public repositories will create failed runs with an error annotation; the workflows won\u2019t execute. After each window, the default rule will return to evaluate mode, allowing workflows to run with warnings. Private and internal repositories aren\u2019t affected. Prepare your workflows Before the first brownout on November 9, use Insights to see which workflow runs the rule would block. From there, you have two options: Keep the default rule in place to block pull_request_target . Explicitly allow pull_request_target in an applicable Actions event policy if your workflows depend on it. Use workflow file targeting to allow specific workflows. See how to control workflow execution to configure your policies. This change applies to public repositories on GitHub Free, GitHub Team, and GitHub Enterprise Cloud, not GitHub Enterprise Server. The post pull_request_target blocked by default December 2 appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "424fb583412143b8e8fc8160b82e540ffa1d6cdc",
+      "title": "Document private vulnerability report limits (#63541)",
+      "url": "https://github.com/github/docs/commit/424fb583412143b8e8fc8160b82e540ffa1d6cdc",
+      "date": "2026-11-02T18:08:20Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/configure-vulnerability-reporting/configure-for-a-repository",
+          "additions": 13,
+          "deletions": 0,
+          "patch": "@@ -81,6 +81,19 @@ You can require reporters to associate at least one Common Weakness Enumeration\n 1. Under **{% data variables.product.UI_advanced_security %}**, to the right of **Private vulnerability reporting**, click **Settings**.\n 1. Under **Submission requirements**, enable **Require a CWE assignment**.\n \n+## About rate limits for private vulnerability reports\n+\n+To protect maintainers from spam and abuse, {% data variables.product.github %} limits how many private vulnerability reports your repository receives and each user can submit per 24-hour period. You can set a lower or higher limit for the total number of reports your repository accepts and exempt trusted reporters. Reports that trusted reporters submit to your repository do not count toward your repository's limits or their global report limit. Reports they submit to other repositories remain subject to the limits for those repositories. For details of the limits, see [AUTOTITLE](/code-security/how-tos/report-and-fix-vulnerabilities/report-privately#rate-limits-for-private-vulnerability-reports).\n+\n+To set a limit for reports to your repository or exempt trusted reporters:\n+\n+{% data reusables.repositories.navigate-to-repo %}\n+{% data reusables.repositories.sidebar-settings %}\n+{% data reusables.repositories.navigate-to-code-security-and-analysis %}\n+1. Under **{% data variables.product.UI_advanced_security %}**, to the right of **Private vulnerability reporting**, click **Settings**.\n+1. Set a custom limit "
+        },
+        {
+          "path": "content/code-security/how-tos/report-and-fix-vulnerabilities/report-privately.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/report-and-fix-vulnerabilities/report-privately",
+          "additions": 12,
+          "deletions": 0,
+          "patch": "@@ -33,3 +33,15 @@ If the repository doesn't have private vulnerability reporting enabled, you need\n {% data reusables.security-advisory.reporting-a-vulnerability-non-admin %}\n \n The next steps depend on the action taken by the repository maintainer. See [AUTOTITLE](/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports).\n+\n+## Rate limits for private vulnerability reports\n+\n+To protect maintainers from spam and abuse, {% data variables.product.github %} limits the number of private vulnerability reports that you can submit:\n+\n+* You can submit a maximum of 25 reports per 24-hour period across repositories where you are not a trusted reporter.\n+* You can submit a maximum of 5 reports to a single repository per 24-hour period.\n+* By default, a repository accepts a maximum of 10 reports per 24-hour period from all reporters combined.\n+\n+Repository maintainers can set a lower or higher total limit for their repository and exempt trusted reporters. Reports to a repository where you are a trusted reporter are exempt from that repository's limits and do not count toward your global 25-report limit. Reports to other repositories still count toward both the global limit and each repository's limits.\n+\n+If you reach a rate limit, you will see a message when you try to submit a new report on {% data variables.product.github %}. Each 24-hour period starts with the first report that counts toward that limit, and the limit resets in"
+        }
+      ]
+    },
+    {
+      "sha": "e755a938bb80e20228732a352ba8c54b4ff90bfd",
+      "title": "Update docs with apm package manager support (#64485)",
+      "url": "https://github.com/github/docs/commit/e755a938bb80e20228732a352ba8c54b4ff90bfd",
+      "date": "2026-11-02T17:46:46Z",
+      "files": [
+        {
+          "path": "content/code-security/reference/supply-chain-security/dependabot-options-reference.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference",
+          "additions": 6,
+          "deletions": 0,
+          "patch": "@@ -231,6 +231,9 @@ The table below shows the package managers that support `cooldown`. The `default\n \n | Package manager        | Default days supported | SemVer-bump days supported |\n |-----------------------|:----------------------:|:--------------------------:|\n+| {% ifversion dependabot-apm-support %} |\n+| APM                   | {% octicon \"check\" aria-label=\"Supported\" %}              | {% octicon \"check\" aria-label=\"Supported\" %} |\n+| {% endif %} |\n | {% ifversion dependabot-bazel-support %} |\n | Bazel               | {% octicon \"check\" aria-label=\"Supported\" %}              | {% octicon \"x\" aria-label=\"Not supported\" %} |\n | {% endif %} |\n@@ -559,6 +562,9 @@ When either limit is reached, {% data variables.product.prodname_dependabot %} r\n \n Package manager | YAML value      | Supported versions |\n ---------------|------------------|:------------------:|\n+| {% ifversion dependabot-apm-support %} |\n+| APM           | `apm`            | Not applicable           |\n+| {% endif %} |\n | {% ifversion dependabot-bazel-support %} |\n | Bazel         | `bazel`          | v7, v8, v9               |\n | {% endif %} |"
+        }
+      ]
+    },
+    {
+      "sha": "360ea8456807e5a173e5889ea1f9128215051f55",
+      "title": "Enhance guidance on vulnerability metrics and enabling security (#64451)",
+      "url": "https://github.com/github/docs/commit/360ea8456807e5a173e5889ea1f9128215051f55",
+      "date": "2026-11-02T15:47:51Z",
+      "files": [
+        {
+          "path": "content/code-security/tutorials/secure-your-organization/interpret-code-security-risk-assessment.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secure-your-organization/interpret-code-security-risk-assessment",
+          "additions": 6,
+          "deletions": 4,
+          "patch": "@@ -32,6 +32,8 @@ Once your assessment completes, review the key metrics at the top of the dashboa\n * **Total vulnerabilities found**: The total number of vulnerabilities found across all scanned repositories.\n * **Copilot Autofix**: The number of vulnerabilities that are eligible for {% data variables.copilot.copilot_autofix_short %}. Enabling {% data variables.product.prodname_GH_code_security %} gives you access to {% data variables.copilot.copilot_autofix_short %}, which can automatically suggest fixes for these alerts.\n \n+The metrics also show how many vulnerabilities were found in **protected** repositories, where {% data variables.product.prodname_GH_code_security %} is enabled, and **unprotected** repositories, where it is not. Use this breakdown to understand risk outside your existing coverage.\n+\n ## Step 2: Review vulnerabilities by language\n \n Look at the **Vulnerabilities by language** chart to understand which languages in your codebase are contributing most to your overall vulnerability count.\n@@ -43,9 +45,9 @@ If vulnerabilities are concentrated in a particular language, this may indicate:\n \n ## Step 3: Identify the most affected repositories\n \n-In the **Repositories scanned** table, you can see each scanned repository alongside the ratio of vulnerabilities eligible for {% data variables.copilot.copilot_autofix_short %} out of the total vulnerabilities found.\n+In the **Repositories scanned** table, you can see each scanned repository, its protection status, an"
+        },
+        {
+          "path": "content/code-security/tutorials/secure-your-organization/interpret-secret-risk-assessment.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secure-your-organization/interpret-secret-risk-assessment",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -36,6 +36,8 @@ Once your assessment completes, review the key metrics at the top of the dashboa\n * **Public leaks**: Distinct secrets found in **public** repositories\n * **Preventable leaks**: Leaks that push protection could have prevented\n \n+The metrics also show how many secrets were found in **protected** repositories, where {% data variables.product.prodname_GH_secret_protection %} is enabled, and **unprotected** repositories, where it is not. Use this breakdown to understand risk outside your existing coverage.\n+\n You can also determine the number of secrets found in your **private repositories** by subtracting the number of public leaks from your total secrets. While remediating these secrets is less immediately important, they still pose risk if someone gains unauthorized access to your repositories, or if a repository is made public.\n \n ## Step 2: Understand secret categories"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-03T08:57:50.804444+00:00"
+}
