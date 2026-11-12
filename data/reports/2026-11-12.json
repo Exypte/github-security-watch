@@ -1,0 +1,17 @@
+{
+  "date": "2026-11-12",
+  "since": "2026-11-11T08:46:57.355618+00:00",
+  "summary": "### TL;DR\n- Nothing in the last day directly affects GitHub Actions or security.\n- The only changelog entry is a planning feature: [issue types and issue fields are now generally available for personal-account repositories](https://github.blog/changelog/2026-11-11-issue-types-and-fields-are-available-for-personal-accounts).\n- No relevant GitHub Docs changes were reported.\n\n### Action required\nNothing this time.\n\n### Security improvements\nNone this time. The one changelog entry does not cover Actions or security. For context, [issue types and fields on personal accounts](https://github.blog/changelog/2026-11-11-issue-types-and-fields-are-available-for-personal-accounts) adds:\n- Up to 25 custom issue types and 25 custom issue fields.\n- Management through the REST and GraphQL APIs and webhooks.\n- The ability to create labels and milestones directly from an issue.\n\nIf you have automation that consumes issue webhooks or API payloads, it may encounter these new type and field values.\n\n### Docs changes worth reading\nNo docs changes were provided for this period.",
+  "note": null,
+  "changelog": [
+    {
+      "title": "Issue types and fields are available for personal accounts",
+      "url": "https://github.blog/changelog/2026-11-11-issue-types-and-fields-are-available-for-personal-accounts",
+      "published": "2026-11-11T17:16:46+00:00",
+      "labels": [],
+      "text": "Issue types and issue fields are now generally available on repositories owned by personal accounts. This brings the same planning capabilities to individual developers and open source maintainers to standardize your workflows and organize issues across repositories. Get started with issue types and issue fields Customize issue types: You can customize issue types from your personal account settings on the Issue types page under \u201cPlanning\u201d. The defaults are Bug , Task , and Feature . You can customize them and create up to 25 issue types. Customize issue fields: You can customize issue fields from your personal account settings on the Issue fields page under \u201cPlanning\u201d. The default issue fields are Priority , Effort , Start date , and Target date . You can customize them and create up to 25 issue fields, with support for text, number, date, single-select, and multi-select fields. You can also pin fields to issue types or make them available on issues without a type. Apply them to issues: You can set the issue type and fields when creating an issue or viewing an existing issue. You can also use them in projects to create custom views and perform bulk updates. Use the API to automate: You can use the REST and GraphQL APIs and webhooks to programmatically manage issue types and fields. Learn more about managing issue types and managing issue fields . Create labels and milestones from an issue You can now create labels and milestones directly from an issue, without navigating to the repository\u2019s labels or milestones pages. If a label or milestone doesn\u2019t match your search criteria, you\u2019ll be prompted to create one. Join the discussion within GitHub Community . The post Issue types and fields are available for personal accounts appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [],
+  "generated_at": "2026-11-12T09:11:16.013437+00:00"
+}
