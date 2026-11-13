@@ -1,0 +1,166 @@
+{
+  "date": "2026-11-13",
+  "since": "2026-11-12T09:11:16.013437+00:00",
+  "summary": "### TL;DR\n- **GitHub-hosted runners will stop running ARM32 jobs on Linux and Windows by December 8, 2026.** Node 24 does not support ARM32, so this follows the end of node20 support. ([changelog](https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement))\n- Secret scanning now detects Cloudflare Access service tokens (`cloudflare_access_service_token`). ([changelog](https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare))\n- New docs guidance: keep the CodeQL action current. Old pinned versions can lose features when server-side flags are removed. ([docs](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning))\n- Each public monitoring alert now has its own URL that you can bookmark or share. ([changelog](https://github.blog/changelog/2026-11-12-public-monitoring-alerts-now-have-direct-links))\n\n### Action required\n- **ARM32 retirement on hosted runners. Deadline: December 8, 2026.**\n  - Support for ARM32 job execution on Windows and Linux hosted runners ends by that date.\n  - This includes native AArch32 user-space execution.\n  - Find workflows that rely on ARM32 or AArch32 execution and migrate them before the deadline.\n  - Source: [changelog](https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement)\n- **Pinned CodeQL action versions** (recommended, no fixed deadline).\n  - If you pin `github/codeql-action` to a commit SHA or patch tag, keep it updated, for example with Dependabot.\n  - Some features depend on server-side flags that may be removed over time, so stale versions can silently lose functionality.\n  - Source: [docs](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning)\n\n### Security improvements\n- **Cloudflare service token detection.** Secret scanning now detects `cloudflare_access_service_token`.\n  - In public repositories, partner secrets are reported automatically to the issuer.\n  - User secrets raise alerts in both public and private repositories.\n  - Source: [changelog](https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare)\n- **Direct links to public monitoring alerts.** Click an alert number in the enterprise Public monitoring view to open it on its own page with a unique URL.\n  - Available to GitHub Enterprise Cloud customers with GitHub Secret Protection or GitHub Advanced Security, at no extra cost.\n  - Sources: [changelog](https://github.blog/changelog/2026-11-12-public-monitoring-alerts-now-have-direct-links), [docs](https://docs.github.com/en/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts)\n\n### Docs changes worth reading\n- **Keeping the CodeQL action up to date.** This new section recommends referencing the action by major version tag (e.g., `v4`) to get bug fixes, features, and CodeQL CLI updates automatically. If you pin to a SHA or patch version for supply-chain reasons, you must keep that pin updated. ([docs](https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning))\n- **AI Scan for repositories.** The docs now explain that enabling the org setting does not start any scans. After enabling it, you can start one-off scans of up to 20 repositories, or scan a single repository from its code scanning alerts page. ([concepts](https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories), [org settings](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings))\n- **Check runs per check suite limit.** The limit is 50,000 check runs per suite. Per the commit title, the docs now state it cannot be raised; previously they said it could be raised via support ticket. ([docs](https://docs.github.com/en/actions/reference/limits), [commit](https://github.com/github/docs/commit/92aee245f30e97a3fc88219aeae8938aacf338b1))\n- **macOS runner queue times.** A note about queue times during high demand was added to the hosted runners and limits pages. The diff does not include the note's exact wording. ([runners](https://docs.github.com/en/actions/reference/runners/github-hosted-runners), [limits](https://docs.github.com/en/actions/reference/limits))",
+  "note": null,
+  "changelog": [
+    {
+      "title": "Actions for ARM32 Linux & Windows retirement",
+      "url": "https://github.blog/changelog/2026-11-12-actions-for-arm32-linux-windows-retirement",
+      "published": "2026-11-12T20:59:36+00:00",
+      "labels": [
+        "actions"
+      ],
+      "text": "GitHub Actions hosted runners will be ending support for ARM32 job execution on Windows and Linux by 8th Dec 2026. This follows our end of support for node20 where Node 24 does not support ARM32. This includes the removal of support on hosted runners for native AArch32 User-space execution. Join the discussion within GitHub Community . The post Actions for ARM32 Linux & Windows retirement appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Secret scanning detects Cloudflare service tokens",
+      "url": "https://github.blog/changelog/2026-11-12-secret-scanning-adds-a-detector-for-cloudflare",
+      "published": "2026-11-12T14:38:25+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "Secret scanning now detects Cloudflare service tokens. Detectors added Secret scanning now automatically detects the following new secret type in your repositories. Provider Secret type Cloudflare cloudflare_access_service_token Partner secrets are automatically reported to the secret issuer when found in public repositories through the secret scanning partnership program . User secrets generate secret scanning alerts when found in public or private repositories. Learn more Learn more about secret scanning and see the full list of supported secrets in our documentation. Let us know what you think in the community discussion . The post Secret scanning detects Cloudflare service tokens appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Public monitoring alerts now have direct links",
+      "url": "https://github.blog/changelog/2026-11-12-public-monitoring-alerts-now-have-direct-links",
+      "published": "2026-11-12T14:37:38+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "You can now access individual public monitoring alerts with a direct link to each alert. In your enterprise\u2019s Public monitoring view, click an alert number to open the alert. You can use its URL to bookmark the finding or share it with teammates who have access. Public monitoring is available for GitHub Enterprise Cloud customers with GitHub Secret Protection or GitHub Advanced Security, at no additional cost. Learn more about viewing and managing public monitoring alerts , or share your feedback in the community discussion . The post Public monitoring alerts now have direct links appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "6946b3e28545f43dcd54d528966bcea34b17da63",
+      "title": "Add note about macOS runner queue times during high demand (#64658)",
+      "url": "https://github.com/github/docs/commit/6946b3e28545f43dcd54d528966bcea34b17da63",
+      "date": "2026-11-12T17:20:44Z",
+      "files": [
+        {
+          "path": "content/actions/reference/limits.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/limits",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -72,6 +72,8 @@ Each workflow file in the `.github/workflows` directory must be 500 KB or smalle\n \n > [!NOTE]\n > The maximum concurrent macOS jobs is shared across standard {% data variables.product.github %}-hosted runners and {% data variables.product.github %}-hosted larger runners.\n+>\n+> {% ifversion fpt or ghec %}{% data reusables.actions.macos-runner-capacity %}{% endif %}\n \n ### Storage limits for all {% data variables.product.github %}-hosted runners\n "
+        },
+        {
+          "path": "content/actions/reference/runners/github-hosted-runners.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -41,6 +41,9 @@ For lists of available runners, see:\n \n {% data reusables.actions.supported-github-runners %}\n \n+> [!NOTE]\n+> {% data reusables.actions.macos-runner-capacity %}\n+\n Workflow logs list the runner used to run a job. For more information, see [AUTOTITLE](/actions/how-tos/monitor-workflows/view-workflow-run-history).\n \n ### Limitations for arm64 macOS runners"
+        }
+      ]
+    },
+    {
+      "sha": "bfd8adeaebdcb93fd75973564764a98eeb568594",
+      "title": "Code Scanning: Add guidance on keeping the CodeQL action up to date (#64616)",
+      "url": "https://github.com/github/docs/commit/bfd8adeaebdcb93fd75973564764a98eeb568594",
+      "date": "2026-11-12T15:57:21Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/find-and-fix-code-vulnerabilities/configure-code-scanning/configuring-advanced-setup-for-code-scanning",
+          "additions": 6,
+          "deletions": 0,
+          "patch": "@@ -78,6 +78,12 @@ For information on bulk enablement, see [AUTOTITLE](/code-security/how-tos/secur\n \n {% ifversion fpt or ghec %}\n \n+### Keeping the {% data variables.product.prodname_codeql %} action up to date\n+\n+We recommend referencing the {% data variables.product.prodname_codeql %} action using a major version tag (for example, `v4`) in your workflow file. This ensures your workflow automatically picks up the latest release within that major version, including bug fixes, new features, and updated {% data variables.product.prodname_codeql_cli %} versions.\n+\n+Some {% data variables.product.prodname_codeql %} action features are enabled by server-side flags that may be removed over time, which can cause old versions to lose functionality. If you pin to a specific commit SHA or patch version tag, keep it updated, for example with {% data variables.product.prodname_dependabot %}. See [AUTOTITLE](/code-security/how-tos/secure-your-supply-chain/secure-your-dependencies/auto-update-actions).\n+\n ## Configuring {% data variables.product.prodname_code_scanning %} using third-party actions\n \n {% data variables.product.github %} includes workflow templates for third-party actions, as well as the {% data variables.product.prodname_codeql %} action. Using a workflow template is much easier than writing a workflow unaided."
+        }
+      ]
+    },
+    {
+      "sha": "92aee245f30e97a3fc88219aeae8938aacf338b1",
+      "title": "Update Actions Limits docs to specify that check runs per-suite limit cannot be raised (#64660)",
+      "url": "https://github.com/github/docs/commit/92aee245f30e97a3fc88219aeae8938aacf338b1",
+      "date": "2026-11-12T15:57:03Z",
+      "files": [
+        {
+          "path": "content/actions/reference/limits.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/limits",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -31,7 +31,7 @@ These limits are subject to change.\n | Workflow execution limit | Job Matrix | 256 jobs / workflow run | A job matrix can generate a maximum of 256 jobs per workflow run. This limit applies to both {% data variables.product.github %}-hosted and self-hosted runners. | {% octicon \"x\" aria-label=\"No\" %} |\n | Workflow execution limit | Re-run | 50 re-runs | A workflow run can be re-run a maximum of 50 times. This limit includes both full re-runs and re-runs of a subset of jobs. | {% octicon \"check\" aria-label=\"Yes\" %} Support ticket |\n | Workflow file | Workflow file size | 500 KB per file | A workflow file larger than 500 KB will not start runs. See [Workflow file size](#workflow-file-size). | {% octicon \"x\" aria-label=\"No\" %} |\n-| Checks | Check runs per check suite | 50,000 check runs / check suite | A check suite can have a maximum of 50,000 check runs. This limit applies to check runs created through the Checks API and by {% data variables.product.prodname_actions %} workflow runs. When a check suite reaches this limit, additional check runs cannot be created for that check suite. | {% octicon \"check\" aria-label=\"Yes\" %} Support ticket |\n+| Checks | Check runs per check suite | 50,000 check runs / check suite | A check suite can have a maximum of 50,000 check runs. This limit applies to check runs created through the Checks API and by {% data variables.product.prodname_actions %} workflow runs. When a check suite reaches this limit, additional check runs ca"
+        }
+      ]
+    },
+    {
+      "sha": "9f7d751b2a317f7466e0d784e06de06e16d1c99a",
+      "title": "Update AI Scan enabling instructions for organizations (#64650)",
+      "url": "https://github.com/github/docs/commit/9f7d751b2a317f7466e0d784e06de06e16d1c99a",
+      "date": "2026-11-12T15:53:58Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/code-scanning/ai-scan-for-repositories.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -74,7 +74,7 @@ AI Scan for repositories supports all languages, including languages already sup\n Before enabling AI Scan for repositories, confirm repository eligibility, review the billing account's included {% data variables.product.prodname_ai_credits_short %}, and configure budgets for metered usage.\n \n * **Enterprise**: Enterprise owners can allow or prevent organizations from enabling AI Scan for repositories. This policy controls both AI Scan on pull requests and AI Scan for a repository's backlog. The policy is set to \"Not allowed\" by default. Allowing AI Scan does not enable it automatically. See [AUTOTITLE](/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise#enforcing-a-policy-to-manage-ai-scan-in-your-enterprises-repositories).\n-* **Organization**: Organization owners and security managers can enable AI Scan for repositories for eligible repositories. Repositories inherit the organization setting. See [AUTOTITLE](/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings#enabling-ai-scan-for-repositories).\n+* **Organization**: Organization owners and security managers can enable AI Scan for repositories for eligible repositories. Repositories inherit the organization setting. After enabling the setting, you can start one-off scans of up to 20 repositories. See [AUTOTITLE](/code-security/how-t"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -148,6 +148,7 @@ You can select **AI Scan for pull requests** to enable the feature for eligible\n \n You can select **AI Scan for repositories** to enable the feature for eligible repositories in your organization where {% data variables.product.prodname_code_scanning %} is enabled. Repositories inherit the organization setting, but repository administrators can opt out for individual repositories. See [AUTOTITLE](/code-security/concepts/code-scanning/ai-scan-for-repositories).\n \n+After enabling the setting, you can start one-off scans of up to 20 repositories. Enabling the setting alone does not start scans. Alternatively, you can start an AI scan for an individual repository from its {% data variables.product.prodname_code_scanning %} repository alerts page.\n {% endif %}\n \n {% ifversion ai-applications-scanning %}"
+        }
+      ]
+    },
+    {
+      "sha": "a2dc14be9d179768b8d84acdaa2eb85ff99801dc",
+      "title": "Merge pull request #64690 from github/repo-sync",
+      "url": "https://github.com/github/docs/commit/a2dc14be9d179768b8d84acdaa2eb85ff99801dc",
+      "date": "2026-11-12T14:35:06Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/code-scanning/ai-powered-security-detections.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -28,7 +28,7 @@ You do not need a {% data variables.product.prodname_copilot %} license to use A\n \n ## Billing\n \n-AI Scan usage is separate from active-committer licensing and is reported under the **{% data variables.product.prodname_code_security %} {% data variables.product.prodname_ai_credits_short %}s** SKU. Usage begins only when a qualifying pull request is scanned.\n+AI Scan usage is separate from active-committer licensing and is reported under the **{% data variables.product.prodname_code_security %} {% data variables.product.prodname_ai_credits_short %}** SKU. Usage begins only when a qualifying pull request is scanned.\n \n For organization-owned repositories, usage is billed to the account responsible for the organization's billing.\n "
+        }
+      ]
+    },
+    {
+      "sha": "5842f2ad8602282b4b744ae8fed9c5e601d93cfe",
+      "title": "[2026-11-11] Public monitoring alerts now have direct links [GA] (#64630)",
+      "url": "https://github.com/github/docs/commit/5842f2ad8602282b4b744ae8fed9c5e601d93cfe",
+      "date": "2026-11-12T14:26:42Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -35,7 +35,7 @@ Public monitoring must be enabled for your enterprise. See [AUTOTITLE](/code-sec\n    * Who the leak is attributed to and in which public repository\n    * How long ago the secret was detected\n \n-1. Click an alert to open the detail panel. The panel includes:\n+1. Click an alert to open the detail panel, or click the alert number to open the alert on its own page. Each alert has a unique URL, which you can bookmark or share with people who have access to it. Alert details include:\n    * The date the secret was committed\n    * The full secret literal\n    * Attribution details, including the committer's username and email"
+        }
+      ]
+    },
+    {
+      "sha": "983a7880e09b9eb2f1cdb9693b95b8b024ab29bc",
+      "title": "Fix \"AI creditss\" typo in AI-powered security detections (#46925)",
+      "url": "https://github.com/github/docs/commit/983a7880e09b9eb2f1cdb9693b95b8b024ab29bc",
+      "date": "2026-11-12T14:01:27Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/code-scanning/ai-powered-security-detections.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -28,7 +28,7 @@ You do not need a {% data variables.product.prodname_copilot %} license to use A\n \n ## Billing\n \n-AI Scan usage is separate from active-committer licensing and is reported under the **{% data variables.product.prodname_code_security %} {% data variables.product.prodname_ai_credits_short %}s** SKU. Usage begins only when a qualifying pull request is scanned.\n+AI Scan usage is separate from active-committer licensing and is reported under the **{% data variables.product.prodname_code_security %} {% data variables.product.prodname_ai_credits_short %}** SKU. Usage begins only when a qualifying pull request is scanned.\n \n For organization-owned repositories, usage is billed to the account responsible for the organization's billing.\n "
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-13T09:00:40.349204+00:00"
+}
