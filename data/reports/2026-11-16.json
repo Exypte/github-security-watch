@@ -1,0 +1,42 @@
+{
+  "date": "2026-11-16",
+  "since": "2026-11-15T08:46:22.944717+00:00",
+  "summary": "### TL;DR\n- A quiet day: no GitHub Changelog entries about Actions or security.\n- No breaking changes, deprecations, or new security capabilities.\n- One minor docs fix: the workflow template instructions now use the current commit button label ([source](https://github.com/github/docs/commit/c4323dfd6a4921c12c136a82cc5907d6f8a4c455)).\n\n### Action required\nNothing this time.\n\n### Security improvements\nNothing this time.\n\n### Docs changes worth reading\n- **Using workflow templates: corrected UI label.** The step for committing a new workflow from a template now says to click **Commit changes...**. It previously said **Start commit**, which no longer matches the UI. The surrounding guidance is unchanged: store any secrets the template references (e.g. `${{ secrets.npm_token }}`) as repository secrets, then commit to the default branch or open a pull request. ([docs](https://docs.github.com/en/actions/how-tos/write-workflows/use-workflow-templates), [commit](https://github.com/github/docs/commit/c4323dfd6a4921c12c136a82cc5907d6f8a4c455))\n\n*Skipped:* a wording-only style edit (\"Click on\" \u2192 \"Click\") in [View job condition logs](https://github.com/github/docs/commit/496096e9913e59b2afd4c6e3362c42f12fe59361).",
+  "note": null,
+  "changelog": [],
+  "docs": [
+    {
+      "sha": "496096e9913e59b2afd4c6e3362c42f12fe59361",
+      "title": "Align with style guide by using click instead of click on in job condition logs (#46953)",
+      "url": "https://github.com/github/docs/commit/496096e9913e59b2afd4c6e3362c42f12fe59361",
+      "date": "2026-11-16T08:49:45Z",
+      "files": [
+        {
+          "path": "content/actions/how-tos/monitor-workflows/view-job-condition-logs.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/view-job-condition-logs",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -15,7 +15,7 @@ When a job's `if` condition is evaluated, {% data variables.product.prodname_act\n ## Accessing expression logs\n \n 1. Navigate to the workflow run summary.\n-1. Click on the job.\n+1. Click the job.\n 1. Click **{% octicon \"gear\" aria-label=\"The Gear icon\" %}**.\n 1. Select **Download log archive**.\n 1. Extract the ZIP file and open the `JOB-NAME/system.txt` file."
+        }
+      ]
+    },
+    {
+      "sha": "c4323dfd6a4921c12c136a82cc5907d6f8a4c455",
+      "title": "Fix UI label mismatch in workflow template instructions (#46933)",
+      "url": "https://github.com/github/docs/commit/c4323dfd6a4921c12c136a82cc5907d6f8a4c455",
+      "date": "2026-11-16T08:36:05Z",
+      "files": [
+        {
+          "path": "content/actions/how-tos/write-workflows/use-workflow-templates.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/use-workflow-templates",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -37,7 +37,7 @@ category:\n \n 1. Some workflow templates use secrets. For example, {% raw %}`${{ secrets.npm_token }}`{% endraw %}. If the workflow template uses a secret, store the value described in the secret name as a secret in your repository. For more information, see [AUTOTITLE](/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).\n 1. Optionally, make additional changes. For example, you might want to change the value of `on` when the workflow runs.\n-1. Click **Start commit**.\n+1. Click **Commit changes...**.\n 1. Write a commit message and decide whether to commit directly to the default branch or to open a pull request.\n \n ## Further reading"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-16T08:56:53.902900+00:00"
+}
