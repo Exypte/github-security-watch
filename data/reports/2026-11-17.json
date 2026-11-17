@@ -1,0 +1,250 @@
+{
+  "date": "2026-11-17",
+  "since": "2026-11-16T08:56:53.902900+00:00",
+  "summary": "### TL;DR\n- **GitHub-hosted runner IP ranges are not dedicated to Actions.** The docs now say the `actions` ranges from `GET /meta` cover the broader address space of the cloud provider regions the runners use. Allowlisting these ranges trusts more than your runners. ([docs](https://docs.github.com/en/actions/reference/runners/github-hosted-runners))\n- **AI Scan for repositories can now be started in bulk** for up to 20 repositories at once. It is in public preview and does not require a Copilot license. ([changelog](https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories))\n- **Actions workflow execution protection docs no longer list plan restrictions.** The \"Evaluate\" enforcement mode is no longer marked as GitHub Enterprise Cloud only. ([docs](https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution))\n- **The VS Code Local harness for Copilot agent sessions will be removed in February 2027.** Admins should move to the Copilot harness, which supports managed runtime permissions and sandbox restrictions. ([changelog](https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027))\n\n### Action required\n- **VS Code Local harness removal (February 2027):**\n  - VS Code 1.146 deprecates the Local harness. Users should select **Copilot** under Session Target and check their customizations for compatibility.\n  - Admins should review any `vscode.temporaryDefaultToLocalHarness` exception. That setting will be removed along with the Local harness, so keeping it won't preserve the Local harness.\n  - Admins should also verify workflows, permission controls and sandbox configuration with the Copilot harness. Selecting the Copilot harness does not enable sandboxing by itself.\n  - [Source](https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027)\n- **Copilot models deprecated as of 2026-11-16:**\n  - Claude Opus 4.8 and Claude Opus 5 \u2192 use Claude Opus 5.5.\n  - GPT-5.6 Terra \u2192 use GPT-6.1 Sol or GPT-6 Luna.\n  - Update any workflows or integrations that pin these models.\n  - If you turned off the global default model enablement, you must enable the alternatives manually.\n  - [Source](https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026)\n- **Review runner IP allowlists.** Keep allowlists in sync with all ranges in the `actions` array. Allowlists limited to Azure or Microsoft ranges, including Entra Conditional Access policies, can block runners from the multi-cloud Linux pool. [Source](https://docs.github.com/en/actions/reference/runners/github-hosted-runners)\n\n### Security improvements\n- **Bulk start for AI Scan for repositories (public preview).**\n  - Scans the default branch, covering languages CodeQL doesn't support and finding extra issues in languages it does.\n  - Findings appear alongside CodeQL alerts.\n  - You can start scans when you enable the org setting or from the org-level code scanning alerts page.\n  - Available on github.com and GHE Cloud with data residency.\n  - [Changelog](https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories), [docs](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings)\n- **Dependabot delegated alert dismissal requests now stay open for one year instead of one week.** This is live on github.com and will ship in GHES 3.24. [Source](https://github.blog/changelog/2026-11-16-dependabot-alert-dismissal-requests-now-last-one-year)\n\n### Docs changes worth reading\n- **Workflow execution protections:**\n  - The page no longer restricts the feature to public repos and Team/Enterprise private repos.\n  - \"Evaluate\" mode, which lets you monitor would-be violations in policy insights, is no longer labeled GHEC-only.\n  - [Docs](https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution)\n- **`ACTIONS_CACHE_MODE` scope:**\n  - The variable is set only for JavaScript and Docker container actions.\n  - It is not available to `run` steps, including `run` steps inside composite actions.\n  - Custom cache logic in shell steps therefore can't read the effective cache mode from it.\n  - [Docs](https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching)\n- **Reusable workflow contexts corrected:**\n  - `jobs.<job_id>.with.*` now allows `github`, `needs`, `strategy`, `matrix`, `inputs` and `vars`. Previously the docs listed only `github` and `needs`.\n  - `jobs.<job_id>.secrets.*` now also allows `strategy`, `matrix`, `inputs` and `vars`.\n  - [Workflow syntax](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax), [contexts](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts)\n- **`workflow_dispatch` inputs:** `description`, `default` and `options` are now documented.\n  - A `choice` input's default must be one of its `options`.\n  - Defining `options` on any non-`choice` input makes the workflow invalid, and it fails to run.\n  - [Docs](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax)\n- **New `issues` activity type:** `status_changed` is now listed as a trigger, on versions that support issue status webhooks. [Docs](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows)\n- **Dependabot and private Swift dependencies:** the org-level \"Grant Dependabot access to private repositories\" setting does not cover Swift. Configure a `git` registry with credentials in `dependabot.yml` instead. [Docs](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings)\n- **Secret scanning historical scan notifications:** owners and security managers are now emailed only when a historical scan generated alerts, not on every completed scan. Don't treat the absence of an email as proof a scan ran. [Docs](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/monitoring-alerts)",
+  "note": null,
+  "changelog": [
+    {
+      "title": "Dependabot alert dismissal requests now last one year",
+      "url": "https://github.blog/changelog/2026-11-16-dependabot-alert-dismissal-requests-now-last-one-year",
+      "published": "2026-11-17T00:09:27+00:00",
+      "labels": [
+        "supply-chain-security"
+      ],
+      "text": "If you use delegated alert dismissal for Dependabot , dismissal requests now stay open for one year instead of one week. Reviewers have more time to respond before a request expires and has to be resubmitted. This change is available on github.com and will ship in GitHub Enterprise Server 3.24. The post Dependabot alert dismissal requests now last one year appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "GitHub Copilot weekly releases \u2014 November 9",
+      "url": "https://github.blog/changelog/2026-11-16-github-copilot-weekly-releases-november-9",
+      "published": "2026-11-16T21:34:53+00:00",
+      "labels": [],
+      "text": "This week, bring GitHub Enterprise Server repositories into the Copilot app and see which agent sessions need you first in VS Code. You can also try two new models, Claude Fable 5.2 and Gemini 4 Carbon. GitHub Copilot Claude Fable 5.2 is available to Copilot Pro+, Max, Business, and Enterprise users. It requires data retention by default, and Copilot Business and Enterprise administrators must turn on its policy, which is off by default. Learn more about Claude Fable 5.2 . Gemini 4 Carbon is available to Copilot Pro+, Max, Business, and Enterprise users. GitHub Copilot app Continue cloud and Codespace sessions on your phone. A new Open in menu includes a GitHub Mobile option that shows a QR code. Sign back in to MCP servers such as Slack without leaving the conversation. When a server needs you to sign in again, the conversation offers the matching connector, connects it in place, and resumes your task. Work with repositories, issues, and pull requests from GitHub Enterprise Server in the Copilot app, now generally available. You\u2019ll still need a GitHub.com or GHE.com account, and cloud sessions aren\u2019t available for GHES. Learn more about signing in with GHES . Schedule Project automations down to the minute, or use a custom cron schedule such as weekdays at 9:30. Dictate in French, Spanish, and other languages. Download the multilingual voice model in settings, then choose Auto or a specific language. Filter issues and pull requests by custom fields, such as a GitHub Project\u2019s Size, from the Add filter menu. Combine high contrast with red, green, or blue-yellow color filters in Settings > Accessibility , and preview combinations before you apply them. High contrast replaces the separate \u201cIncrease contrast\u201d setting. You can also choose GitHub Dimmed as a dark-only palette in Settings > Themes . Install the GitHub Copilot app . GitHub Copilot in VS Code (1.146 release) Let an agent run model comparisons for you. With Compare Models enabled, turn on the agent tools in settings, and agents can find available models, launch comparisons, and read the results to summarize findings. This is experimental. Track agent sessions across all your workspaces from one view with Inbox mode in the Agents window\u2019s sessions list. Sessions that need your attention appear first, and you can dismiss, hold, or snooze the rest. This is experimental. Move a chat out of the Agents window into its own window, then arrange the chat, its editors, and its terminals to fit the task. Chat windows are in preview. Find, install, and uninstall extensions without leaving the Agents window. Extensions with unsupported features show a warning before you install them. This is experimental. Move to the Copilot harness before the Local harness is removed in February 2027. The Copilot harness is already the default for new sessions, and the transition guide covers moving any remaining workflows. Explore everything that\u2019s new in the full release notes . The post GitHub Copilot weekly releases \u2014 November 9 appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "GitHub Copilot models deprecated on November 16, 2026",
+      "url": "https://github.blog/changelog/2026-11-16-github-copilot-models-deprecated-on-november-16-2026",
+      "published": "2026-11-16T20:25:20+00:00",
+      "labels": [],
+      "text": "As of today, November 16, 2026, we have deprecated the following models across most GitHub Copilot experiences (including Copilot Chat, inline edits, ask and agent modes, and code completions). Note that Claude Opus 4.8 is still available to individual GitHub Copilot subscribers on annual plans. These deprecations were announced on October 15, 2026 . Model Deprecation date Suggested alternative Claude Opus 4.8 2026-11-16 Claude Opus 5.5 Claude Opus 5 2026-11-16 Claude Opus 5.5 GPT-5.6 Terra 2026-11-16 GPT-6.1 Sol or GPT-6 Luna Claude Opus 5 has been removed from the model picker but remains available for runtime refusal fallback through existing authorized access. Existing enterprise model policies continue to apply. Please update your workflows and integrations to use supported models. Under default model enablement, the suggested alternatives are automatically enabled for Copilot Enterprise and Copilot Business customers unless an administrator has turned off the global default or explicitly disabled the model. If you\u2019ve turned off the global default, you can enable access to the alternative models through their model policies in Copilot settings. Once enabled, users will see the model in the Copilot Chat model selector in supported GitHub Copilot experiences. No action is required to remove the deprecated models. GitHub Enterprise customers with questions or concerns are encouraged to reach out to their account manager for further assistance. Share your feedback To learn more about the models available in Copilot, see our documentation on models and get started with Copilot today. Join the GitHub Community to share your feedback. The post GitHub Copilot models deprecated on November 16, 2026 appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "VS Code retires the Local harness in February 2027",
+      "url": "https://github.blog/changelog/2026-11-16-vs-code-retires-the-local-harness-in-february-2027",
+      "published": "2026-11-16T19:22:56+00:00",
+      "labels": [],
+      "text": "Visual Studio Code 1.146 deprecates the Local harness, the older software that coordinates the model, context, and tools for GitHub Copilot agent sessions in the editor. The Local harness will be removed in February 2027. Its replacement, the Microsoft Copilot harness , is built into VS Code and has been the default for new sessions since VS Code 1.143. You can keep working in VS Code and running agent commands on your machine. Choosing the Copilot harness doesn\u2019t move your files to the cloud. During the three-month transition, the Local harness remains available where your organization\u2019s policy permits. However, new features and improvements will focus on the Copilot harness. Why use the Copilot harness Built on the Copilot SDK , the Copilot harness shares its coding-agent runtime with Copilot CLI and the GitHub Copilot app. You can continue the same session between the editor and the Agents window in VS Code while the session\u2019s Agent Host process stays running. Editor-provided tools still require a connected editor. With the Copilot harness, you can: Let Copilot Fusion choose models and, on supported tiers, coordinate drafting and review for your task. Reduce approval interruptions with assisted permissions . Calls that are not approved by the risk assessment will still come to you for confirmation. Bring context from your team\u2019s services using Copilot connectors , without configuring MCP servers yourself. Connectors are in preview. Plan work on task boards and explore interactive diagrams with canvases , which are in preview. If you access models through GitHub Copilot, you can continue to use your existing plan, including Copilot Free. Individual features and Fusion tiers depend on your plan, settings, and organization policy. With the Copilot harness, administrators can enforce managed runtime permissions and sandbox restrictions that the Local harness cannot enforce. Configure these controls separately; selecting the Copilot harness doesn\u2019t enable sandboxing. What you need to do If you still use the Local harness, start a new session in VS Code and select Copilot under Session Target . Review your customizations for compatibility before February 2027. Switching harnesses doesn\u2019t automatically convert every customization. If you administer VS Code, review any vscode.temporaryDefaultToLocalHarness exception and verify your required workflows, permission controls, and sandbox configuration with the Copilot harness before February 2027. The temporary enterprise-managed setting will be removed along with the Local harness, so keeping the exception configured won\u2019t keep the Local harness available. Follow the Local harness transition guide . If a workflow blocks your move, report a VS Code issue . The post VS Code retires the Local harness in February 2027 appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Bulk start AI Scan for repositories",
+      "url": "https://github.blog/changelog/2026-11-16-bulk-start-ai-scan-for-repositories",
+      "published": "2026-11-16T15:50:22+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "AI Scan for repositories finds security vulnerabilities on your repository\u2019s default branch. It covers languages CodeQL doesn\u2019t support and finds additional issues in languages CodeQL already analyzes. Findings appear in your code scanning backlog alongside CodeQL alerts. You can now start AI Scans for up to 20 repositories at once. Start scans for selected repositories when you enable the organization-level setting, or from the code scanning organization alerts page. You can also start a scan for an individual repository from its alerts page. Bulk start for AI Scan for repositories is in public preview. AI Scan for repositories is available on github.com and GitHub Enterprise Cloud with data residency. A GitHub Copilot license isn\u2019t required. Learn more about AI Scan and join the discussion in GitHub Community . The post Bulk start AI Scan for repositories appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "dd904c534c3f4f961ad5ddd2212613ce3d3320a4",
+      "title": "Remove plan restrictions from Actions policies docs (#64720)",
+      "url": "https://github.com/github/docs/commit/dd904c534c3f4f961ad5ddd2212613ce3d3320a4",
+      "date": "2026-11-16T22:18:09Z",
+      "files": [
+        {
+          "path": "content/actions/how-tos/administer/control-workflow-execution.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/administer/control-workflow-execution",
+          "additions": 1,
+          "deletions": 2,
+          "patch": "@@ -10,7 +10,6 @@ redirect_from:\n   - /organizations/managing-organization-settings/actions-policies/workflow-execution-protections\n   - /admin/enforcing-policies/enforcing-policies-for-your-enterprise/actions-policies/workflow-execution-protections\n permissions: 'Repository administrators, organization owners, and enterprise owners'\n-product: 'All public repositories, and private repositories on {% data variables.product.prodname_team %} or {% data variables.product.prodname_enterprise %}.'\n ---\n \n {% data reusables.actions.actions-policies-about-body %} For more information, see [AUTOTITLE](/actions/concepts/about-actions-policies).\n@@ -62,7 +61,7 @@ In an enterprise:\n Next, create a new policy.\n \n 1. Choose a name for the policy.\n-1. Choose an enforcement status. If you select **Evaluate** ({% data variables.product.prodname_ghe_cloud %} only), you will be able to monitor when users would hit the restriction in policy insights.\n+1. Choose an enforcement status. If you select **Evaluate**, you will be able to monitor when users would hit the restriction in policy insights.\n 1. Target your desired workflows, organizations, or repositories.\n 1. Configure the following workflow execution protections.\n "
+        }
+      ]
+    },
+    {
+      "sha": "a624c74d23e805b17edd03b5c49ac670acc60f77",
+      "title": "Clarify Swift private dependency access requirements (#64709)",
+      "url": "https://github.com/github/docs/commit/a624c74d23e805b17edd03b5c49ac670acc60f77",
+      "date": "2026-11-16T16:36:44Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -89,6 +89,9 @@ For more information about configuring self-hosted runners for {% data variables\n \n To update private dependencies of repositories in your organization, {% data variables.product.prodname_dependabot %} needs access to those repositories. To grant {% data variables.product.prodname_dependabot %} access to the desired private {% ifversion ghec or ghes %}or internal {% endif %}repository, scroll down to the \"Grant {% data variables.product.prodname_dependabot %} access to private repositories\" section, then use the search bar to find and select the desired repository. Be aware that granting {% data variables.product.prodname_dependabot %} access to a repository means all users in your organization will have access to the contents of that repository through {% data variables.product.prodname_dependabot_updates %}. For more information about the supported ecosystems for private repositories, see [AUTOTITLE](/code-security/reference/supply-chain-security/supported-ecosystems-and-repositories).\n \n+> [!NOTE]\n+> For Swift updates, this setting does not grant access to private dependencies. Configure a `git` registry with credentials in your `dependabot.yml` file instead. See [AUTOTITLE](/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/configure-access-to-private-registries#git).\n+\n ## Configuring global {% data variables.product.prodname_code_scanning %} settings\n \n {% data reusables.code-scanning.about-code-scanning %}"
+        }
+      ]
+    },
+    {
+      "sha": "70a872f79ab26a767c172bace1670c7db91445a4",
+      "title": "Enhance AI scan instructions for repositories (#64696)",
+      "url": "https://github.com/github/docs/commit/70a872f79ab26a767c172bace1670c7db91445a4",
+      "date": "2026-11-16T16:10:31Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings",
+          "additions": 1,
+          "deletions": 2,
+          "patch": "@@ -148,10 +148,9 @@ You can select **AI Scan for pull requests** to enable the feature for eligible\n \n You can select **AI Scan for repositories** to enable the feature for eligible repositories in your organization where {% data variables.product.prodname_code_scanning %} is enabled. Repositories inherit the organization setting, but repository administrators can opt out for individual repositories. See [AUTOTITLE](/code-security/concepts/code-scanning/ai-scan-for-repositories).\n \n-After enabling the setting, you can start one-off scans of up to 20 repositories. Enabling the setting alone does not start scans. Alternatively, you can start an AI scan for an individual repository from its {% data variables.product.prodname_code_scanning %} repository alerts page.\n+After enabling the setting, you can start one-off scans of up to 20 repositories. Enabling the setting alone does not start scans. Alternatively, you can start one-off AI scans in bulk for multiple repositories from the {% data variables.product.prodname_code_scanning %} organization alerts page, or start an AI scan for a single repository from its {% data variables.product.prodname_code_scanning %} repository alerts page.\n \n You can also manage this setting with the REST API by using the `repository_scan` property. See [AUTOTITLE](/rest/code-scanning/code-scanning#update-the-ai-scan-setting-for-an-organization).\n-\n {% endif %}\n \n {% ifversion ai-applications-scanning %}"
+        }
+      ]
+    },
+    {
+      "sha": "3d26e901f8adac59cc8349e1168b7129e09e3c9b",
+      "title": "Document issue status webhooks and the `status_changed` activity type (#64639)",
+      "url": "https://github.com/github/docs/commit/3d26e901f8adac59cc8349e1168b7129e09e3c9b",
+      "date": "2026-11-16T16:08:19Z",
+      "files": [
+        {
+          "path": "content/actions/reference/workflows-and-actions/events-that-trigger-workflows.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows",
+          "additions": 61,
+          "deletions": 1,
+          "patch": "@@ -321,7 +321,7 @@ jobs:\n \n | Webhook event payload | Activity types | `GITHUB_SHA` | `GITHUB_REF` |\n | --------------------- | -------------- | ------------ | -------------|\n-| [`issues`](/webhooks/webhook-events-and-payloads#issues) | - `opened`<br/>- `edited`<br/>- `deleted`<br/>- `transferred`<br/>- `pinned`<br/>- `unpinned`<br/>- `closed`<br/>- `reopened`<br/>- `assigned`<br/>- `unassigned`<br/>- `labeled`<br/>- `unlabeled`<br/>- `locked`<br/>- `unlocked`<br/>- `milestoned`<br/> - `demilestoned`<br/> - `typed`<br/> - `untyped`{% ifversion issue-fields %}<br/> - `field_added`<br/> - `field_removed`{% endif %} | Last commit on default branch | Default branch |\n+| [`issues`](/webhooks/webhook-events-and-payloads#issues) | - `opened`<br/>- `edited`<br/>- `deleted`<br/>- `transferred`<br/>- `pinned`<br/>- `unpinned`<br/>- `closed`<br/>- `reopened`<br/>- `assigned`<br/>- `unassigned`<br/>- `labeled`<br/>- `unlabeled`<br/>- `locked`<br/>- `unlocked`<br/>- `milestoned`<br/> - `demilestoned`<br/> - `typed`<br/> - `untyped`{% ifversion issue-fields %}<br/> - `field_added`<br/> - `field_removed`{% endif %}{% ifversion issue-status-webhooks %}<br/> - `status_changed`{% endif %} | Last commit on default branch | Default branch |\n \n > [!NOTE]\n > * {% data reusables.developer-site.multiple_activity_types %} For information about each activity type, see [AUTOTITLE](/webhooks/webhook-events-and-payloads#issues). {% data reusables.developer-site.limit_workflow_to_activity_types %}\n@@ -34"
+        }
+      ]
+    },
+    {
+      "sha": "80d459cbe42df10944936cee9e711200e508bb4f",
+      "title": "Merge pull request #64741 from github/repo-sync",
+      "url": "https://github.com/github/docs/commit/80d459cbe42df10944936cee9e711200e508bb4f",
+      "date": "2026-11-16T14:48:56Z",
+      "files": [
+        {
+          "path": "content/actions/how-tos/monitor-workflows/view-job-condition-logs.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/monitor-workflows/view-job-condition-logs",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -15,7 +15,7 @@ When a job's `if` condition is evaluated, {% data variables.product.prodname_act\n ## Accessing expression logs\n \n 1. Navigate to the workflow run summary.\n-1. Click on the job.\n+1. Click the job.\n 1. Click **{% octicon \"gear\" aria-label=\"The Gear icon\" %}**.\n 1. Select **Download log archive**.\n 1. Extract the ZIP file and open the `JOB-NAME/system.txt` file."
+        },
+        {
+          "path": "content/actions/how-tos/write-workflows/use-workflow-templates.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/how-tos/write-workflows/use-workflow-templates",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -37,7 +37,7 @@ category:\n \n 1. Some workflow templates use secrets. For example, {% raw %}`${{ secrets.npm_token }}`{% endraw %}. If the workflow template uses a secret, store the value described in the secret name as a secret in your repository. For more information, see [AUTOTITLE](/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets).\n 1. Optionally, make additional changes. For example, you might want to change the value of `on` when the workflow runs.\n-1. Click **Start commit**.\n+1. Click **Commit changes...**.\n 1. Write a commit message and decide whether to commit directly to the default branch or to open a pull request.\n \n ## Further reading"
+        },
+        {
+          "path": "content/actions/reference/workflows-and-actions/contexts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/contexts",
+          "additions": 2,
+          "deletions": 2,
+          "patch": "@@ -101,7 +101,7 @@ The following table lists the restrictions on where each context and special fun\n | `jobs.<job_id>.name` | `github, needs, strategy, matrix, vars, inputs` | None |\n | `jobs.<job_id>.outputs.<output_id>` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, steps, inputs` | None |\n | `jobs.<job_id>.runs-on` | `github, needs, strategy, matrix, vars, inputs` | None |\n-| `jobs.<job_id>.secrets.<secrets_id>` | `github, needs, strategy, matrix, secrets, inputs, vars` | None |\n+| `jobs.<job_id>.secrets.<secret_id>` | `github, needs, strategy, matrix, secrets, inputs, vars` | None |\n | `jobs.<job_id>.services` | `github, needs, strategy, matrix, vars, inputs` | None |\n | `jobs.<job_id>.services.<service_id>.credentials` | `github, needs, strategy, matrix, env, vars, secrets, inputs` | None |\n | `jobs.<job_id>.services.<service_id>.env.<env_id>` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, inputs` | None |\n@@ -115,7 +115,7 @@ The following table lists the restrictions on where each context and special fun\n | `jobs.<job_id>.steps.working-directory` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, steps, inputs` | `hashFiles` |\n | `jobs.<job_id>.strategy` | `github, needs, vars, inputs` | None |\n | `jobs.<job_id>.timeout-minutes` | `github, needs, strategy, matrix, vars, inputs` | None |\n-| `jobs.<job_id>.with.<with_id>` | `github, needs, strategy, matrix, inputs, vars` | None |\n+| `jobs.<job_id>.with.<input_"
+        },
+        {
+          "path": "content/actions/reference/workflows-and-actions/dependency-caching.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -314,6 +314,9 @@ For the trusted-versus-low-trust trigger breakdown, see [Cache access for low-tr\n \n The runner exposes the effective mode in the `ACTIONS_CACHE_MODE` environment variable, and the `actions/cache` action and the `@actions/cache` toolkit honor it. Restore is skipped when the mode does not allow reads (`none` or `write-only`), and save is skipped when the mode does not allow writes (`none` or `read`). When a cache operation is skipped because of the mode, the action logs an informational message and the step and run continue without failing. A skipped restore is treated as a cache miss; a skipped save is simply not performed.\n \n+> [!NOTE]\n+> `ACTIONS_CACHE_MODE` is only set in the environment of JavaScript and Docker container actions. It is not available to `run` steps, including `run` steps in composite actions.\n+\n ### Cache access in reusable workflows\n \n `cache-mode` propagates from a caller workflow to the reusable workflows it calls. An explicit `cache-mode` on the calling job, or inherited from the caller workflow, limits the cache access the called workflow can request."
+        },
+        {
+          "path": "content/actions/reference/workflows-and-actions/workflow-syntax.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+          "additions": 14,
+          "deletions": 2,
+          "patch": "@@ -337,6 +337,18 @@ A boolean specifying whether the input must be supplied.\n \n The value of this parameter is a string specifying the data type of the input. This must be one of: `boolean`, `choice`, `number`, `environment` or `string`.\n \n+## `on.workflow_dispatch.inputs.<input_id>.description`\n+\n+A string description of the input parameter.\n+\n+## `on.workflow_dispatch.inputs.<input_id>.default`\n+\n+The default value used when the input is not specified when the workflow is triggered manually. For inputs with `type: choice`, the default must be one of the values listed in `options`.\n+\n+## `on.workflow_dispatch.inputs.<input_id>.options`\n+\n+A sequence of strings that sets the options of the dropdown list for an input with `type: choice`. `options` is valid only for `choice` inputs: a workflow that defines `options` on an input of any other type is invalid and fails to run.\n+\n ## `permissions`\n \n {% data reusables.actions.jobs.section-assigning-permissions-to-jobs %}\n@@ -1581,7 +1593,7 @@ jobs:\n \n A pair consisting of a string identifier for the input and the value of the input. The identifier must match the name of an input defined by [`on.workflow_call.inputs.<inputs_id>`](/actions/reference/workflows-and-actions/metadata-syntax#inputsinput_id) in the called workflow. The data type of the value must match the type defined by [`on.workflow_call.inputs.<input_id>.type`](#onworkflow_callinputsinput_idtype) in the called workflow.\n \n-Allowed expression contexts: `github`, and `n"
+        }
+      ]
+    },
+    {
+      "sha": "28d27064d49fe856efee59fbaa017c0c0d4aa2ff",
+      "title": "Fix allowed contexts for reusable workflow secrets/inputs (#40392)",
+      "url": "https://github.com/github/docs/commit/28d27064d49fe856efee59fbaa017c0c0d4aa2ff",
+      "date": "2026-11-16T10:37:27Z",
+      "files": [
+        {
+          "path": "content/actions/reference/workflows-and-actions/contexts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/contexts",
+          "additions": 2,
+          "deletions": 2,
+          "patch": "@@ -101,7 +101,7 @@ The following table lists the restrictions on where each context and special fun\n | `jobs.<job_id>.name` | `github, needs, strategy, matrix, vars, inputs` | None |\n | `jobs.<job_id>.outputs.<output_id>` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, steps, inputs` | None |\n | `jobs.<job_id>.runs-on` | `github, needs, strategy, matrix, vars, inputs` | None |\n-| `jobs.<job_id>.secrets.<secrets_id>` | `github, needs, strategy, matrix, secrets, inputs, vars` | None |\n+| `jobs.<job_id>.secrets.<secret_id>` | `github, needs, strategy, matrix, secrets, inputs, vars` | None |\n | `jobs.<job_id>.services` | `github, needs, strategy, matrix, vars, inputs` | None |\n | `jobs.<job_id>.services.<service_id>.credentials` | `github, needs, strategy, matrix, env, vars, secrets, inputs` | None |\n | `jobs.<job_id>.services.<service_id>.env.<env_id>` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, inputs` | None |\n@@ -115,7 +115,7 @@ The following table lists the restrictions on where each context and special fun\n | `jobs.<job_id>.steps.working-directory` | `github, needs, strategy, matrix, job, runner, env, vars, secrets, steps, inputs` | `hashFiles` |\n | `jobs.<job_id>.strategy` | `github, needs, vars, inputs` | None |\n | `jobs.<job_id>.timeout-minutes` | `github, needs, strategy, matrix, vars, inputs` | None |\n-| `jobs.<job_id>.with.<with_id>` | `github, needs, strategy, matrix, inputs, vars` | None |\n+| `jobs.<job_id>.with.<input_"
+        },
+        {
+          "path": "content/actions/reference/workflows-and-actions/workflow-syntax.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+          "additions": 2,
+          "deletions": 2,
+          "patch": "@@ -1593,7 +1593,7 @@ jobs:\n \n A pair consisting of a string identifier for the input and the value of the input. The identifier must match the name of an input defined by [`on.workflow_call.inputs.<inputs_id>`](/actions/reference/workflows-and-actions/metadata-syntax#inputsinput_id) in the called workflow. The data type of the value must match the type defined by [`on.workflow_call.inputs.<input_id>.type`](#onworkflow_callinputsinput_idtype) in the called workflow.\n \n-Allowed expression contexts: `github`, and `needs`.\n+Allowed expression contexts: `github`, `needs`, `strategy`, `matrix`, `inputs`, and `vars`.\n \n ## `jobs.<job_id>.secrets`\n \n@@ -1651,7 +1651,7 @@ jobs:\n \n A pair consisting of a string identifier for the secret and the value of the secret. The identifier must match the name of a secret defined by [`on.workflow_call.secrets.<secret_id>`](#onworkflow_callsecretssecret_id) in the called workflow.\n \n-Allowed expression contexts: `github`, `needs`, and `secrets`.\n+Allowed expression contexts: `github`, `needs`, `strategy`, `matrix`, `secrets`, `inputs`, and `vars`.\n \n ## Filter pattern cheat sheet\n "
+        }
+      ]
+    },
+    {
+      "sha": "8c86ec9df433f2f82bd29fa23332fc3a45a52353",
+      "title": "Document description, default and options for workflow_dispatch inputs (#46300)",
+      "url": "https://github.com/github/docs/commit/8c86ec9df433f2f82bd29fa23332fc3a45a52353",
+      "date": "2026-11-16T10:19:30Z",
+      "files": [
+        {
+          "path": "content/actions/reference/workflows-and-actions/workflow-syntax.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax",
+          "additions": 12,
+          "deletions": 0,
+          "patch": "@@ -337,6 +337,18 @@ A boolean specifying whether the input must be supplied.\n \n The value of this parameter is a string specifying the data type of the input. This must be one of: `boolean`, `choice`, `number`, `environment` or `string`.\n \n+## `on.workflow_dispatch.inputs.<input_id>.description`\n+\n+A string description of the input parameter.\n+\n+## `on.workflow_dispatch.inputs.<input_id>.default`\n+\n+The default value used when the input is not specified when the workflow is triggered manually. For inputs with `type: choice`, the default must be one of the values listed in `options`.\n+\n+## `on.workflow_dispatch.inputs.<input_id>.options`\n+\n+A sequence of strings that sets the options of the dropdown list for an input with `type: choice`. `options` is valid only for `choice` inputs: a workflow that defines `options` on an input of any other type is invalid and fails to run.\n+\n ## `permissions`\n \n {% data reusables.actions.jobs.section-assigning-permissions-to-jobs %}"
+        }
+      ]
+    },
+    {
+      "sha": "ae61b5347931d74e150b780955bb1bc306518ae7",
+      "title": "Clarify IP address range information for GitHub-hosted runners in documentation (#64577)",
+      "url": "https://github.com/github/docs/commit/ae61b5347931d74e150b780955bb1bc306518ae7",
+      "date": "2026-11-16T09:52:22Z",
+      "files": [
+        {
+          "path": "content/actions/reference/runners/github-hosted-runners.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/runners/github-hosted-runners",
+          "additions": 4,
+          "deletions": 4,
+          "patch": "@@ -83,13 +83,13 @@ Windows virtual machines are configured to run as administrators with User Accou\n \n ## IP addresses\n \n-To get a list of IP address ranges that {% data variables.product.prodname_actions %} uses for {% data variables.product.prodname_dotcom %}-hosted runners, you can use the {% data variables.product.prodname_dotcom %} REST API. For more information, see the `actions` key in the response of the `GET /meta` endpoint. For more information, see [AUTOTITLE](/rest/meta/meta#get-github-meta-information).\n+To get the full set of IP address ranges from which {% data variables.product.prodname_dotcom %}-hosted runners may be assigned an IP address, use the `actions` key in the response from the `GET /meta` REST API endpoint. For more information, see [AUTOTITLE](/rest/meta/meta#get-github-meta-information).\n \n-Eligible Linux runners use a multi-cloud compute pool, so their outbound IP addresses are not limited to Azure datacenter ranges. Keep any IP allowlists or network-based access policies used by your workflows in sync with all ranges in the `actions` array, rather than relying on cloud-provider-specific ranges. Policies that allow only Azure or Microsoft-owned ranges, including Microsoft Entra Conditional Access policies, can block connections or authentication from these runners.\n+These ranges are not dedicated to {% data variables.product.prodname_actions %}. They cover the broader address space of the cloud provider regions where {% data variables.product.pr"
+        }
+      ]
+    },
+    {
+      "sha": "1de1e9959707dc847194c5e89dca4ebff202253f",
+      "title": "Updates note on when emails are sent for secret scanning historical scans (backfills) (#64717)",
+      "url": "https://github.com/github/docs/commit/1de1e9959707dc847194c5e89dca4ebff202253f",
+      "date": "2026-11-16T09:28:35Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/monitoring-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-secret-scanning-alerts/monitoring-alerts",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -45,7 +45,7 @@ In addition to displaying an alert in the **{% data variables.product.prodname_s\n \n For historical scans, {% data variables.product.github %} notifies the following users:\n \n-* Organization owners, enterprise owners, and security managers\u2014whenever a historical scan is complete, even if no secrets are found.\n+* Organization owners, enterprise owners, and security managers\u2014whenever a historical scan that generated {% data variables.secret-scanning.alerts %} is complete.\n * Repository administrators, security managers, and users with custom roles with read/write access\u2014whenever a historical scan detects a secret, and according to their notification preferences.\n \n We do _not_ notify commit authors."
+        }
+      ]
+    },
+    {
+      "sha": "6d8473326810b94469e2282d5427b69404337152",
+      "title": "Clarify that ACTIONS_CACHE_MODE is not set for run steps (#46906)",
+      "url": "https://github.com/github/docs/commit/6d8473326810b94469e2282d5427b69404337152",
+      "date": "2026-11-16T09:09:55Z",
+      "files": [
+        {
+          "path": "content/actions/reference/workflows-and-actions/dependency-caching.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/reference/workflows-and-actions/dependency-caching",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -314,6 +314,9 @@ For the trusted-versus-low-trust trigger breakdown, see [Cache access for low-tr\n \n The runner exposes the effective mode in the `ACTIONS_CACHE_MODE` environment variable, and the `actions/cache` action and the `@actions/cache` toolkit honor it. Restore is skipped when the mode does not allow reads (`none` or `write-only`), and save is skipped when the mode does not allow writes (`none` or `read`). When a cache operation is skipped because of the mode, the action logs an informational message and the step and run continue without failing. A skipped restore is treated as a cache miss; a skipped save is simply not performed.\n \n+> [!NOTE]\n+> `ACTIONS_CACHE_MODE` is only set in the environment of JavaScript and Docker container actions. It is not available to `run` steps, including `run` steps in composite actions.\n+\n ### Cache access in reusable workflows\n \n `cache-mode` propagates from a caller workflow to the reusable workflows it calls. An explicit `cache-mode` on the calling job, or inherited from the caller workflow, limits the cache access the called workflow can request."
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-17T10:04:31.455404+00:00"
+}
