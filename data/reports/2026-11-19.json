@@ -1,0 +1,379 @@
+{
+  "date": "2026-11-19",
+  "since": "2026-11-18T09:40:18.718056+00:00",
+  "summary": "### TL;DR\n- **Security risk assessments now run automatically for organizations on GitHub Team.** They are free and surface exposed credentials and code vulnerabilities. ([changelog](https://github.blog/changelog/2026-11-18-security-risk-assessments-run-automatically-on-github-team))\n- **Dependabot alert dismissal requests now expire after 1 year** under delegated dismissal. Older versions keep a 1-week expiry. Expired requests must be resubmitted. ([docs commit](https://github.com/github/docs/commit/53d128354cf59e192712dc42a4416cddedc08eaf))\n- **Governance note:** Gemini 4 Neon is now GA in Copilot, including the Copilot coding agent and CLI. It is **automatically enabled** unless an admin has turned off the global default or disabled this model in the Copilot model policy. ([changelog](https://github.blog/changelog/2026-11-18-gemini-4-neon-in-github-copilot))\n\n### Action required\nNothing this time.\n\n### Security improvements\n- **Automatic security risk assessments on GitHub Team:** Organization admins and security managers can review the findings to:\n  - identify exposed credentials and code vulnerabilities,\n  - understand the organization's current risk,\n  - prioritize next steps.\n\n  These cover both code security and secret risk assessments. ([changelog](https://github.blog/changelog/2026-11-18-security-risk-assessments-run-automatically-on-github-team); see also [Viewing your security risk assessment reports](https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports))\n- **Copilot model governance:** Copilot Business and Enterprise admins can manage access to Gemini 4 Neon through the model policy in Copilot settings. Under default enablement, new models become available to users automatically. Teams with model allow-list requirements should check their policy settings. ([changelog](https://github.blog/changelog/2026-11-18-gemini-4-neon-in-github-copilot))\n\n### Docs changes worth reading\n- **[Enable delegated alert dismissal (Dependabot)](https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/enable-delegated-alert-dismissal):** The page now documents when dismissal requests expire:\n  - **1 year** where the expiry feature is available,\n  - **1 week** on versions without it.\n\n  After expiry, a request must be resubmitted. Reviewers working through a backlog of dismissal requests should account for this. ([commit](https://github.com/github/docs/commit/53d128354cf59e192712dc42a4416cddedc08eaf))\n- The large commit \"[Onboard five initiative journeys to docsTeamMetrics enforcement](https://github.com/github/docs/commit/8279f1d7f407f0015ece2b10ec217cdd8dfdc74d)\" only adds internal `docsTeamMetrics` metadata tags to code quality and secret protection pages. There is no change in substance.",
+  "note": null,
+  "changelog": [
+    {
+      "title": "Gemini 4 Neon in GitHub Copilot",
+      "url": "https://github.blog/changelog/2026-11-18-gemini-4-neon-in-github-copilot",
+      "published": "2026-11-18T21:49:21+00:00",
+      "labels": [],
+      "text": "Gemini 4 Neon is now generally available in GitHub Copilot. It is designed for agentic coding, multistep tool use, and knowledge work. According to Google, Gemini 4 Neon delivers quality close to Gemini 4 Carbon at a lower token cost per task. Google also reports that, compared with Gemini 4 Carbon, it starts responding faster and makes fewer unrequested changes on coding tasks. It is also less likely to make unsupported claims about code, tool, or test results. This model is billed at provider list pricing under usage-based billing. See Models and pricing for GitHub Copilot for details. Availability in GitHub Copilot Gemini 4 Neon is available to Copilot Pro+, Max, Business, and Enterprise users. You can select the model in the model picker in: Visual Studio Code Visual Studio Copilot CLI GitHub Copilot coding agent GitHub Copilot app github.com GitHub Mobile on iOS and Android JetBrains IDEs Xcode Eclipse Rollout will be gradual. Check back soon if you don\u2019t see it yet. Enabling access Copilot Enterprise and Copilot Business plan administrators can manage access to Gemini 4 Neon through the model policy in Copilot settings. Under default model enablement, new models are automatically enabled unless an administrator has turned off the global default or explicitly disables this model. Learn more To explore all models available in GitHub Copilot, see our documentation on models and get started with Copilot. Share your feedback Join the GitHub Community to share your feedback. The post Gemini 4 Neon in GitHub Copilot appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Security risk assessments run automatically on GitHub Team",
+      "url": "https://github.blog/changelog/2026-11-18-security-risk-assessments-run-automatically-on-github-team",
+      "published": "2026-11-18T16:54:26+00:00",
+      "labels": [
+        "application-security"
+      ],
+      "text": "GitHub security risk assessments now run automatically for organizations on GitHub Team. Organization admins and security managers can review findings from the free assessments to identify exposed credentials and code vulnerabilities, understand their organization\u2019s current risk, and prioritize next steps. Read more about code security risk assessments and secret risk assessments . The post Security risk assessments run automatically on GitHub Team appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "8279f1d7f407f0015ece2b10ec217cdd8dfdc74d",
+      "title": "Onboard five initiative journeys to docsTeamMetrics enforcement (#64722)",
+      "url": "https://github.com/github/docs/commit/8279f1d7f407f0015ece2b10ec217cdd8dfdc74d",
+      "date": "2026-11-18T18:11:03Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/code-quality/code-quality.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-quality/code-quality",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ product: '{% data reusables.gated-features.code-quality-availability %}'\n versions:\n   feature: code-quality\n contentType: concepts\n+docsTeamMetrics:\n+  - code-quality\n audience:\n   - driver\n redirect_from:"
+        },
+        {
+          "path": "content/code-security/concepts/code-quality/enablement-at-scale.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-quality/enablement-at-scale",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -6,6 +6,8 @@ intro: '{% data variables.product.prodname_code_quality %} can cover one reposit\n versions:\n   feature: code-quality\n contentType: concepts\n+docsTeamMetrics:\n+  - code-quality\n product: '{% data reusables.gated-features.code-quality-availability %}'\n audience:\n   - driver"
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/public-monitoring.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/public-monitoring",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   feature: secret-scanning-public-monitoring\n product: 'Public monitoring is available for enterprises on {% data variables.product.prodname_ghe_cloud %} with {% data variables.product.prodname_GH_advanced_security %} or {% data variables.product.prodname_GH_secret_protection %} enabled, including those on {% data variables.enterprise.data_residency %}.'\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/push-protection-metrics.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/push-protection-metrics",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghes: '*'\n   ghec: '*'\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/push-protection.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/push-protection",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -13,6 +13,8 @@ redirect_from:\n   - /code-security/concepts/secret-security/about-push-protection\n shortTitle: Push protection\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n   - Move review earlier and make it smarter"
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/secret-leakage-risks.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/secret-leakage-risks",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/secret-scanning.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -16,6 +16,8 @@ versions:\n   ghec: '*'\n shortTitle: Secret scanning\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/concepts/security-at-scale/select-pilot-repositories.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/security-at-scale/select-pilot-repositories",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: concepts\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n redirect_from:"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/disable-code-quality.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/disable-code-quality",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ permissions: '{% data reusables.permissions.code-quality-repo-enable %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n category:\n   - Improve code quality\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/enable-code-quality.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/enable-code-quality",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ permissions: '{% data reusables.permissions.code-quality-repo-enable %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n redirect_from:\n   - /code-security/code-quality/how-tos/enable-code-quality\n category:"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/explore-code-quality.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/explore-code-quality",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ permissions: Organization members\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n versions:\n   feature: code-quality\n category:"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/interpret-results.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/interpret-results",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -10,6 +10,8 @@ permissions: '{% data reusables.permissions.code-quality-see-repo-findings %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n redirect_from:\n   - /code-security/code-quality/how-tos/interpret-results\n category:"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/restrict-code-coverage.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/restrict-code-coverage",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   feature: code-quality\n permissions: '{% data reusables.permissions.code-quality-repo-enable %}'\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n category:\n   - Improve code quality\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/roll-out-at-scale.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/roll-out-at-scale",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ permissions: '{% data reusables.permissions.code-quality-repo-enable %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n category:\n   - Improve code quality\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/set-pr-thresholds.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/set-pr-thresholds",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -10,6 +10,8 @@ permissions: '{% data reusables.permissions.code-quality-repo-enable %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n redirect_from:\n   - /code-security/code-quality/how-tos/set-pr-thresholds\n category:"
+        },
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/view-and-manage-cost.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/view-and-manage-cost",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ permissions: '{% data reusables.permissions.enhanced-billing-cloud-all %}'\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n category:\n   - Improve code quality\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/allow-github-code-quality-in-enterprise.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/allow-github-code-quality-in-enterprise",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ permissions: Enterprise owners\n audience:\n   - driver\n contentType: how-tos\n+docsTeamMetrics:\n+  - code-quality\n allowTitleToDifferFromFilename: true\n redirect_from:\n   - /code-security/code-quality/how-tos/allow-in-enterprise"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-enterprise-security/manage-your-coverage/enabling-public-monitoring-for-your-enterprise.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/manage-your-coverage/enabling-public-monitoring-for-your-enterprise",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -6,6 +6,8 @@ versions:\n   feature: secret-scanning-public-monitoring\n permissions: Enterprise owners and enterprise security managers can enable public monitoring for their enterprise.\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/assess-your-secret-risk",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -12,6 +12,8 @@ redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/assess-your-secret-risk\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/estimate-price.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/estimate-price",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghes: '*'\n permissions: '{% data reusables.permissions.push-protection-roi-calculator %}'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/estimating-the-price-of-secret-protection\n   - /code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/estimating-the-price-of-secret-protection"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/protect-your-secrets.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/protect-your-secrets",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -5,6 +5,8 @@ intro: Secure your organization's secrets within your budget by enabling {% data\n product: Organizations on {% data variables.product.prodname_team %} or {% data variables.product.prodname_enterprise %}\n allowTitleToDifferFromFilename: true\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n versions:\n   fpt: '*'\n   ghec: '*'"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/viewing-your-security-risk-assessment-reports",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -12,6 +12,8 @@ versions:\n redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/viewing-the-secret-risk-assessment-report-for-your-organization\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/apply-custom-configuration",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -12,6 +12,8 @@ redirect_from:\n   - /code-security/securing-your-organization/enabling-security-features-in-your-organization/applying-a-custom-security-configuration\n   - /code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/applying-a-custom-security-configuration\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/customize-leak-detection/define-custom-patterns",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -15,6 +15,8 @@ versions:\n   ghes: '*'\n   ghec: '*'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ permissions: '{% data reusables.permissions.security-repo-enable %}'\n versions:\n   feature: secret-scanning-ai-generic-secret-detection\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/secret-scanning/enabling-ai-powered-generic-secret-detection\n   - /code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/generic-secret-detection/enabling-ai-powered-generic-secret-detection"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-generic-patterns.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-generic-patterns",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n shortTitle: Enable for generic patterns\n redirect_from:\n   - /code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/non-provider-patterns/enabling-secret-scanning-for-non-provider-patterns"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/manage-bypass-requests/enable-delegated-bypass",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n shortTitle: Enable delegated bypass\n redirect_from:\n   - /code-security/secret-scanning/using-advanced-secret-scanning-and-push-protection-features/delegated-bypass-for-push-protection/enabling-delegated-bypass-for-push-protection"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/prevent-future-leaks/enable-push-protection.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/prevent-future-leaks/enable-push-protection",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -8,6 +8,8 @@ versions:\n   ghes: '*'\n   ghec: '*'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/secret-scanning/enabling-secret-scanning-features/enabling-push-protection-for-your-repository\n   - /code-security/how-tos/secure-your-secrets/prevent-future-leaks/enabling-push-protection-for-your-repository"
+        },
+        {
+          "path": "content/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/use-ghas-with-ai-coding-agents/scan-for-secrets-with-github-mcp-server",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n   feature: copilot\n permissions: 'People with write access to a repository.'\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/view-and-interpret-data/analyze-organization-data/viewing-public-monitoring-alerts",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ permissions: 'Enterprise owners and enterprise security managers can access the\n versions:\n   feature: secret-scanning-public-monitoring\n contentType: how-tos\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n ---"
+        },
+        {
+          "path": "content/code-security/reference/secret-security/supported-secret-scanning-patterns.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -13,6 +13,8 @@ redirect_from:\n shortTitle: Supported patterns\n autogenerated: secret-scanning\n contentType: reference\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/tutorials/code-quality-adoption-path.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/code-quality-adoption-path",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ layout: journey-landing\n versions:\n   feature: code-quality\n contentType: tutorials\n+docsTeamMetrics:\n+  - code-quality\n audience:\n   - driver\n category:"
+        },
+        {
+          "path": "content/code-security/tutorials/improve-code-quality/catch-issues-before-merge.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/improve-code-quality/catch-issues-before-merge",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ versions:\n product: '{% data reusables.gated-features.code-quality-availability %}'\n permissions: '{% data reusables.permissions.code-quality-see-repo-findings %}'\n contentType: tutorials\n+docsTeamMetrics:\n+  - code-quality\n redirect_from:\n   - /code-security/code-quality/tutorials/fix-findings-in-prs\n   - /code-security/tutorials/improve-code-quality/fix-findings-in-prs"
+        },
+        {
+          "path": "content/code-security/tutorials/remediate-leaked-secrets/assessing-ghsp-impact.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/assessing-ghsp-impact",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -8,6 +8,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/tutorials/remediate-leaked-secrets/calculate-cost-savings.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/calculate-cost-savings",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghes: '*'\n permissions: '{% data reusables.permissions.push-protection-roi-calculator %}'\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/calculating-the-cost-savings-of-push-protection\n   - /code-security/how-tos/secure-at-scale/configure-organization-security/configure-specific-tools/calculating-the-cost-savings-of-push-protection"
+        },
+        {
+          "path": "content/code-security/tutorials/remediate-leaked-secrets/evaluating-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/evaluating-alerts",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -11,6 +11,8 @@ allowTitleToDifferFromFilename: true\n redirect_from:\n   - /code-security/secret-scanning/managing-alerts-from-secret-scanning/evaluating-alerts\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/remediate-leaked-secrets/remediating-a-leaked-secret",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -10,6 +10,8 @@ versions:\n redirect_from:\n   - /code-security/secret-scanning/working-with-secret-scanning-and-push-protection/remediating-a-leaked-secret\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Protect your secrets\n ---"
+        },
+        {
+          "path": "content/code-security/tutorials/secret-protection-adoption-path.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secret-protection-adoption-path",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Secure at scale\n   - Protect your secrets"
+        },
+        {
+          "path": "content/code-security/tutorials/secure-your-organization/interpret-secret-risk-assessment.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secure-your-organization/interpret-secret-risk-assessment",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -9,6 +9,8 @@ versions:\n   ghec: '*'\n   ghes: '*'\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/interpreting-secret-risk-assessment-results\n   - /code-security/tutorials/secure-your-organization/interpreting-secret-risk-assessment-results"
+        },
+        {
+          "path": "content/code-security/tutorials/secure-your-organization/organize-leak-remediation.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/secure-your-organization/organize-leak-remediation",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -7,6 +7,8 @@ allowTitleToDifferFromFilename: true\n versions:\n   feature: security-campaigns\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n redirect_from:\n   - /code-security/securing-your-organization/understanding-your-organizations-exposure-to-leaked-secrets/organizing-remediation-efforts-for-leaked-secrets\n   - /code-security/tutorials/secure-your-organization/organizing-remediation-efforts-for-leaked-secrets"
+        },
+        {
+          "path": "content/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/tutorials/trialing-github-advanced-security/trial-advanced-security",
+          "additions": 2,
+          "deletions": 0,
+          "patch": "@@ -14,6 +14,8 @@ redirect_from:\n   - /code-security/trialing-github-advanced-security/trial-advanced-security\n shortTitle: Trial Advanced Security\n contentType: tutorials\n+docsTeamMetrics:\n+  - secret-protection\n category:\n   - Plan your security strategy\n   - Move review earlier and make it smarter"
+        }
+      ]
+    },
+    {
+      "sha": "53d128354cf59e192712dc42a4416cddedc08eaf",
+      "title": "Document 1-year expiry for Dependabot alert dismissal requests (#64743)",
+      "url": "https://github.com/github/docs/commit/53d128354cf59e192712dc42a4416cddedc08eaf",
+      "date": "2026-11-18T15:20:29Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/enable-delegated-alert-dismissal.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/manage-security-alerts/manage-dependabot-alerts/enable-delegated-alert-dismissal",
+          "additions": 4,
+          "deletions": 1,
+          "patch": "@@ -12,7 +12,10 @@ category:\n   - Secure your dependencies\n ---\n \n->[!NOTE] {% data reusables.security.delegated-alert-dismissal-capacity %}\n+> [!NOTE]\n+> {% data reusables.security.delegated-alert-dismissal-capacity %}\n+>\n+> Alert dismissal requests expire after {% ifversion dependabot-dismissal-request-expiry %}1 year{% else %}1 week{% endif %}, after which they must be resubmitted.\n \n ## Configuring delegated dismissal for a repository\n "
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-19T09:48:44.830267+00:00"
+}
