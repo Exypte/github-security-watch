@@ -1,0 +1,106 @@
+{
+  "date": "2026-11-20",
+  "since": "2026-11-19T09:48:44.830267+00:00",
+  "summary": null,
+  "note": "AI summary unavailable: AuthenticationError: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011ChDxERCumKHg4R1JyB7Cj'}",
+  "changelog": [
+    {
+      "title": "Improvements on the pull request overview in public preview",
+      "url": "https://github.blog/changelog/2026-11-19-improvements-on-the-pull-request-overview-in-public-preview",
+      "published": "2026-11-20T00:02:21+00:00",
+      "labels": [],
+      "text": "Your feedback has helped improve the new pull request Overview page since its November 5, 2026 public preview. Here\u2019s what\u2019s new! Clearer merge status and next steps Failed optional checks no longer make mergeable pull requests appear blocked. Previously missing merge requirements now show what needs attention. Readiness summary gives reviewers and visitors clearer guidance, including when no action is needed. Smoother review and comment interactions Checks and approvals now expand when clicked, instead of pinning a preview. Fixed overlapping previews and mobile interaction issues. Resolved review threads now collapse to keep completed conversations out of the way. Comments mentioning Copilot now better explain the action and selected model before submission. Activity details Force-push activity now links to the old and new commits so you can compare changes. Commit activity now includes timestamps so you can see when changes were made. Page layout and sidebar actions Source and target branches now stay visible on smaller screens. Edit links in the Development sidebar directly in Overview. Lock or unlock PR conversations directly in Overview. Fixed uneven spacing, misalignment, and sidebar gaps across screen sizes. Try the new overview page and give feedback To join, select the \u2728 Try the Overview page button in the header. You can use the same menu to return to the classic overview during the preview. This preview is very much a starting point, not the finished pull request experience. Try it on your next pull request. What is easier to find? Where do you still lose context? What sends you back to the classic overview? Share your feedback and report issues in the overview preview feedback discussion . The post Improvements on the pull request overview in public preview appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Enterprise Live Migrations from Azure DevOps generally available",
+      "url": "https://github.blog/changelog/2026-11-19-enterprise-live-migrations-from-azure-devops-generally-available",
+      "published": "2026-11-19T18:50:57+00:00",
+      "labels": [],
+      "text": "Enterprise Live Migrations (ELM) from Azure DevOps Services to GitHub Enterprise Cloud with data residency is now generally available. You can move your repositories while your teams keep working, then cut over on your schedule. Manage migrations through the portal or CLI: Choose a guided experience in the Azure DevOps portal or script your migrations with the Azure DevOps CLI. Pre-migration validation and lifecycle tracking help you identify issues and monitor progress before cutover. Cut over on your schedule: ELM continuously syncs changes from Azure DevOps to GitHub, so developers can keep contributing throughout the migration. When you\u2019re ready, complete the move with a brief cutover at a time that works for your teams. Bring your development history with you: ELM syncs Git history, branches, tags, and pull requests, including titles, descriptions, comments, and user history. Your Azure DevOps branch policies migrate as GitHub branch rulesets. Keep using Azure Boards and Azure Pipelines: You can have ELM create the Azure Boards connection and rewire Azure Pipelines to your migrated GitHub repository, reducing manual setup after cutover. Your work items and pipeline definitions stay in Azure DevOps. Ready to start your migration journey? Visit Microsoft\u2019s ELM documentation to learn more and get started. The post Enterprise Live Migrations from Azure DevOps generally available appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "Red Hat Enterprise Linux runner images now generally available",
+      "url": "https://github.blog/changelog/2026-11-19-red-hat-enterprise-linux-runner-images-now-generally-available",
+      "published": "2026-11-19T18:48:46+00:00",
+      "labels": [
+        "actions"
+      ],
+      "text": "Red Hat Enterprise Linux (RHEL) 9 and RHEL 10 images for GitHub-hosted larger runners are now generally available. Originally introduced in public preview in June 2026 in partnership with Red Hat, these images are now fully supported for production workflows in GitHub Actions. You can use RHEL images to run your workflows on the same operating system you deploy to, or as the foundation for custom images that include your required tools, dependencies, and configurations. To get started, create a new Linux x64 larger runner and choose your desired RHEL image under partner images. If you\u2019ve been using RHEL images during the public preview, no action is required. Your existing runners and workflows will continue to work as-is. RHEL images are available for larger runners on GitHub Team and GitHub Enterprise Cloud plans. To learn more, see Managing larger runners and Using custom images . The post Red Hat Enterprise Linux runner images now generally available appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "892c1ef42b37c5601122e9113f06aadd05355778",
+      "title": "GitHub Enterprise Server 3.23 release candidate (#63904)",
+      "url": "https://github.com/github/docs/commit/892c1ef42b37c5601122e9113f06aadd05355778",
+      "date": "2026-11-19T20:43:56Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/secret-security/about-alerts.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/about-alerts",
+          "additions": 2,
+          "deletions": 1,
+          "patch": "@@ -40,7 +40,8 @@ The generic alerts list displays alerts that relate to generic secrets detected\n In addition, alerts that fall into this category:\n * Are limited in quantity to 5000 alerts per repository (this includes open and closed alerts).\n * Are not shown in the summary views for security overview, only in the \"{% data variables.product.prodname_secret_scanning_caps %}\" view.\n-* Only have the first five detected locations shown on {% data variables.product.prodname_dotcom %} for generic patterns{% ifversion secret-scanning-ai-generic-secret-detection %}, and only the first detected location shown for AI-detected secrets{% endif %}.\n+* Only have the first five detected locations shown on {% data variables.product.prodname_dotcom %} for generic patterns{% ifversion secret-scanning-ai-generic-secret-detection %}, and only the first detected location shown for AI-detected secrets{% endif %}.{% ifversion secret-scanning-ai-generic-secret-detection %}\n+* Can appear after a delay for existing secrets, because enabling {% data variables.secret-scanning.ai-detected-secrets %} for a repository queues a historical scan of existing code.{% endif %}\n \n For {% data variables.product.company_short %} to scan for generic patterns{% ifversion secret-scanning-ai-generic-secret-detection %} and AI-detected secrets{% endif %}, you must first enable the feature{% ifversion secret-scanning-ai-generic-secret-detection %}s{% endif %} for your repository or organization. For more information, "
+        },
+        {
+          "path": "content/code-security/concepts/secret-security/secret-scanning.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/secret-security/secret-scanning",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -80,7 +80,7 @@ Beyond the default detection of partner and provider secrets, you can expand and\n * **Validity checks.** Prioritize remediation by checking whether detected secrets are still active.\n {% endif %}\n {% ifversion secret-scanning-ai-generic-secret-detection %}\n-* **{% data variables.secret-scanning.ai-detected-secrets-caps %}.** Use AI to detect unstructured secrets like passwords.\n+* **{% data variables.secret-scanning.ai-detected-secrets-caps %}.** Use AI to detect unstructured secrets like passwords.{% ifversion ghes %} On {% data variables.product.prodname_ghe_server %}, classification runs locally on your appliance, so it works in air-gapped and network-isolated environments.{% endif %}\n {% endif %}\n {% ifversion secret-scanning-custom-pattern-ai-generated %}\n * **AI-generated regular expressions.** Use AI to generate regular expressions for custom patterns."
+        },
+        {
+          "path": "content/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning",
+          "additions": 47,
+          "deletions": 0,
+          "patch": "@@ -19,6 +19,10 @@ category:\n \n If someone checks a secret with a known pattern into a repository, {% data variables.product.prodname_secret_scanning %} catches the secret as it's checked in, and helps you mitigate the impact of the leak. Repository administrators are notified about any commit that contains a secret, and they can quickly view all detected secrets in the **{% data variables.product.prodname_security_and_quality_tab %}** tab for the repository. See [AUTOTITLE](/code-security/concepts/secret-security/secret-scanning).\n \n+{% ifversion secret-scanning-ai-generic-secret-detection %}\n+{% data variables.product.prodname_secret_scanning_caps %} can also detect unstructured secrets, such as passwords, using an AI model ({% data variables.secret-scanning.ai-detected-secrets %}). The model classifies code locally on your appliance's CPUs, with no GPU, hosted LLM, or outbound network connection required, so it works in air-gapped and network-isolated environments.\n+{% endif %}\n+\n ## Availability\n \n When the enterprise has [{% data variables.product.prodname_GH_secret_protection %}](/get-started/learning-about-github/about-github-advanced-security) enabled, {% data variables.product.prodname_secret_scanning_caps %} is available for organization-owned and user-owned repositories.\n@@ -33,6 +37,9 @@ When the enterprise has [{% data variables.product.prodname_GH_secret_protection\n * A license for {% data variables.product.prodname_GH_secret_protection %} or {% data variables.p"
+        },
+        {
+          "path": "content/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enabling-secret-scanning-for-ai-detected-secrets",
+          "additions": 5,
+          "deletions": 1,
+          "patch": "@@ -22,7 +22,11 @@ category:\n \n {% data reusables.secret-scanning.generic-secret-detection-policy-note %}\n \n-You can enable {% data variables.secret-scanning.generic-secret-detection %} in the security settings page of your repository or organization.\n+{% ifversion ghes %}\n+For {% data variables.product.prodname_ghe_server %}, a site administrator must first enable {% data variables.secret-scanning.ai-detected-secrets %} for the instance so that repository and security-configuration controls are available. If you don't have site administrator access, ask your {% data variables.product.prodname_ghe_server %} administrator to enable this setting first. See [AUTOTITLE](/code-security/how-tos/secure-at-scale/configure-enterprise-security/configure-specific-tools/configure-secret-scanning#enabling-ai-detected-secrets).\n+\n+{% endif %}\n+Enabling {% data variables.secret-scanning.generic-secret-detection %} queues a historical scan of existing code. Findings appear in the **Generic** alerts list. Disabling {% data variables.secret-scanning.ai-detected-secrets %} doesn't disable standard {% data variables.product.prodname_secret_scanning %}.\n \n {% data reusables.secret-scanning.copilot-secret-scanning-generic-secrets-subscription-note %}\n "
+        },
+        {
+          "path": "content/code-security/reference/secret-security/supported-secret-scanning-patterns.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/secret-security/supported-secret-scanning-patterns",
+          "additions": 1,
+          "deletions": 1,
+          "patch": "@@ -99,7 +99,7 @@ Precision levels are estimated based on the pattern type's typical false positiv\n \n ## Supported AI-detected patterns\n \n-{% data variables.product.prodname_secret_scanning_caps %} uses {% data variables.product.prodname_copilot_short %} to detect generic secrets using AI.{% ifversion fpt or ghec %} See [AUTOTITLE](/code-security/responsible-use/security-and-quality-ai-features).{% endif %}\n+{% data variables.product.github %} uses an AI model to detect unstructured secrets, such as passwords.{% ifversion ghes %} On {% data variables.product.prodname_ghe_server %}, this model runs locally on your appliance and requires no hosted LLM or outbound network connection.{% endif %}{% ifversion fpt or ghec %} See [AUTOTITLE](/code-security/responsible-use/security-and-quality-ai-features).{% endif %}\n \n | Provider | Token |\n |----------|:--------------------|"
+        }
+      ]
+    },
+    {
+      "sha": "9cd94de01f5e78a436b742e5f954c4dd6b8d41c6",
+      "title": "clarify AI Scan model-policy behavior (#64736)",
+      "url": "https://github.com/github/docs/commit/9cd94de01f5e78a436b742e5f954c4dd6b8d41c6",
+      "date": "2026-11-19T10:28:40Z",
+      "files": [
+        {
+          "path": "content/code-security/concepts/code-scanning/ai-powered-security-detections.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-powered-security-detections",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -106,6 +106,9 @@ Enabling the organization setting enables AI Scan immediately for all eligible r\n \n You do not need to select a model to enable AI Scan.\n \n+> [!NOTE]\n+> {% data reusables.code-scanning.ai-scan-model-policies %}\n+\n * **Enterprise**: Enterprise owners can allow or prevent organizations from enabling AI Scan. The policy is set to \"Not allowed\" by default. This policy controls both AI Scan on pull requests and AI Scan for a repository's backlog. Allowing AI Scan does not enable it automatically. See [AUTOTITLE](/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise#enforcing-a-policy-to-manage-ai-scan-in-your-enterprises-repositories).\n * **Organization**: Organization owners and security managers can enable AI Scan for pull requests for eligible repositories. Repositories inherit the organization setting. See [AUTOTITLE](/code-security/how-tos/secure-at-scale/configure-organization-security/establish-complete-coverage/configure-global-settings#enabling-ai-scan-for-pull-requests).\n * **Organization-owned repository**: People with admin access to the repository can opt out when the organization has enabled AI Scan. They cannot opt in when the organization setting is disabled."
+        },
+        {
+          "path": "content/code-security/concepts/code-scanning/ai-scan-for-repositories.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/concepts/code-scanning/ai-scan-for-repositories",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -71,6 +71,9 @@ AI Scan for repositories supports all languages, including languages already sup\n \n ## Enabling AI Scan for repositories\n \n+> [!NOTE]\n+> {% data reusables.code-scanning.ai-scan-model-policies %}\n+\n Before enabling AI Scan for repositories, confirm repository eligibility, review the billing account's included {% data variables.product.prodname_ai_credits_short %}, and configure budgets for metered usage.\n \n * **Enterprise**: Enterprise owners can allow or prevent organizations from enabling AI Scan for repositories. This policy controls both AI Scan on pull requests and AI Scan for a repository's backlog. The policy is set to \"Not allowed\" by default. Allowing AI Scan does not enable it automatically. See [AUTOTITLE](/enterprise-cloud@latest/admin/enforcing-policies/enforcing-policies-for-your-enterprise/enforcing-policies-for-code-security-and-analysis-for-your-enterprise#enforcing-a-policy-to-manage-ai-scan-in-your-enterprises-repositories)."
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-20T09:35:42.034058+00:00"
+}
