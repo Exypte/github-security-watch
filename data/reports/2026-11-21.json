@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-21",
+  "since": "2026-11-20T09:35:42.034058+00:00",
+  "summary": null,
+  "note": "AI summary unavailable: AuthenticationError: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'invalid x-api-key'}, 'request_id': 'req_011ChFowUP1wpk3qfbnZQBfL'}",
+  "changelog": [
+    {
+      "title": "Security advisory permissions are now generally available",
+      "url": "https://github.blog/changelog/2026-11-20-security-advisory-permissions-are-now-generally-available",
+      "published": "2026-11-20T21:49:29+00:00",
+      "labels": [
+        "supply-chain-security"
+      ],
+      "text": "Organization owners can now let people work on repository security advisories, including private vulnerability reports, through custom repository roles . You no longer have to make them repository administrators or give them the organization-wide security manager role. Four new permissions are available under Security when you create or edit a custom repository role: View security advisories : view draft security advisories, their status, and comments. Create, Edit, and Manage security advisories : everything in View, plus Create and Edit advisories, comment, manage collaborators, and create a temporary private fork. Accept private vulnerability reports and close or reopen security advisories : requires View or Create, Edit, and Manage . Publish security advisories and request CVEs : requires View or Create, Edit, and Manage . Assign the role to users and teams on only the repositories where they need it. The permissions apply to both repository security advisories and private vulnerability reports, so you can give a team access to the repositories they maintain without exposing advisories across your whole organization. A few things to know: Merging changes from a temporary private fork still requires a repository administrator or security manager. People with any of these new permissions can\u2019t delete a temporary private fork. Confidential comments are only available to people with Create, Edit, and Manage who also have write access to the repository. This is available to organizations on plans that support custom repository roles, including GitHub Enterprise Cloud. To get started, see Repository security advisories in the GitHub Docs. The post Security advisory permissions are now generally available appeared first on The GitHub Blog ."
+    },
+    {
+      "title": "GitHub Enterprise Server 3.23 release candidate",
+      "url": "https://github.blog/changelog/2026-11-20-github-enterprise-server-3-23-release-candidate",
+      "published": "2026-11-20T20:41:26+00:00",
+      "labels": [],
+      "text": "GitHub Enterprise Server (GHES) 3.23 is now available and introduces new capabilities across the platform. Here are a few highlights in the 3.23 release: When working in GitHub Projects, you can create more precise project views by combining filters with logical OR , explicit AND , and parentheses for grouping. For example, (status:Done OR status:Todo) is:issue shows issues with either status. If your enterprise uses GitHub Secret Protection, you can detect unstructured secrets entirely within your network using AI secret detection on GHES, including in air-gapped environments. A self-contained, fine-tuned model runs on the appliance\u2019s CPU without a GPU, hosted LLM, or outbound connection. This feature is in public preview and subject to change. As a developer, you can identify known malicious packages in PyPI, Maven, RubyGems, NuGet, Go, Rust, and Composer through the GitHub Advisory Database, in addition to npm. The database automatically ingests malware advisories from OpenSSF\u2019s malicious-packages repository to expand coverage across these ecosystems. By default, Dependabot waits until a package version has been available on its registry for at least three days before opening a version update pull request. This cooldown gives maintainers and the community more time to detect and report compromised or buggy releases before users merge updates. As an OAuth app developer, you can limit token lifetimes by using access tokens that expire after eight hours and refresh tokens to obtain new access tokens. Token expiration is opt-in for existing OAuth apps and the default for newly created apps. You can request expiring tokens with scope=offline_access during authorization for testing and gradual rollout, or require expiration in your app registration. Before requiring expiration, you must update all clients to request, store, and use refresh tokens to avoid breaking sign-in for clients that do not support them. This feature is in public preview and subject to change. In your GHES cluster, you can now move the Redis primary from a node that also runs other services, such as MySQL, to a dedicated node. Redis then uses the dedicated node\u2019s resources and data volume rather than sharing them with those services. This procedure does not attach a new disk to an existing node or use an external Redis service. Release candidates let you try the latest features early and share feedback before general availability. To learn more, see About upgrades to new releases and the GHES 3.23 release notes . To get started, download the GHES 3.23 release candidate . If you have feedback or questions about the release candidate, contact GitHub Support . The post GitHub Enterprise Server 3.23 release candidate appeared first on The GitHub Blog ."
+    }
+  ],
+  "docs": [
+    {
+      "sha": "a31bc7f982e83a59138c9d9fb68744dbbda2aa52",
+      "title": "Document security advisory permissions for custom repository roles (#64505)",
+      "url": "https://github.com/github/docs/commit/a31bc7f982e83a59138c9d9fb68744dbbda2aa52",
+      "date": "2026-11-20T21:22:34Z",
+      "files": [
+        {
+          "path": "content/code-security/reference/permissions/repository-security-advisory.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/reference/permissions/repository-security-advisory",
+          "additions": 32,
+          "deletions": 0,
+          "patch": "@@ -44,6 +44,38 @@ Collaborators with write permissions can't create a temporary private fork, with\n \n Repository security advisory collaborators without write access to the repository cannot create or view confidential comments. This restriction includes the reporter of a privately reported vulnerability unless they also have write access. See [AUTOTITLE](/code-security/how-tos/report-and-fix-vulnerabilities/fix-reported-vulnerabilities/manage-vulnerability-reports#discussing-a-report-with-people-who-have-write-access).\n \n+{% ifversion ghec %}\n+\n+### Permissions from custom repository roles\n+\n+Organizations that use custom repository roles can let people work on repository security advisories without making them repository administrators or security managers. Add one or more of these permissions to a custom repository role. See [AUTOTITLE](/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/about-custom-repository-roles).\n+\n+* **View security advisories**: view draft security advisories, their status, and comments, but not confidential comments or the advisory's event history.\n+* **Create, edit, and manage security advisories**: everything in \"View security advisories\", plus create and edit security advisories, comment, manage collaborators, and create a temporary private fork.\n+* **Accept private vulnerability reports and close or reopen security advisories**: requires one of the permissions above.\n+* **Publish security advisorie"
+        }
+      ]
+    },
+    {
+      "sha": "73e439022cca20b1f3cc40525c3159095e6b4166",
+      "title": "Document Cobertura validation error for code coverage uploads (#64803)",
+      "url": "https://github.com/github/docs/commit/73e439022cca20b1f3cc40525c3159095e6b4166",
+      "date": "2026-11-20T19:06:45Z",
+      "files": [
+        {
+          "path": "content/code-security/how-tos/maintain-quality-code/set-up-code-coverage.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/code-security/how-tos/maintain-quality-code/set-up-code-coverage",
+          "additions": 3,
+          "deletions": 0,
+          "patch": "@@ -106,6 +106,9 @@ After your tests generate a Cobertura XML report, upload it to {% data variables\n    * **`LABEL`**: A label to identify this coverage report (for example, `code-coverage/pytest`).\n 1. Commit and push the workflow change.\n \n+> [!NOTE]\n+> The upload action checks that your file is a Cobertura XML report. If it isn't, for example because your test tool produced an LCOV report, the upload step fails with the error `This file is not a Cobertura XML report. Upload a Cobertura XML report.` To fix this, configure your test framework to output Cobertura XML, or convert your report to Cobertura XML before the upload step.\n+\n ### Full workflow example\n \n This example runs Python tests with `pytest-cov` and uploads the coverage report:"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-21T09:08:09.498366+00:00"
+}
