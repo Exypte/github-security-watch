@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-28",
+  "since": "2026-11-27T10:28:24.221332+00:00",
+  "summary": "### TL;DR\n- No GitHub Changelog entries in this period.\n- The only notable change is a rewrite of the enterprise GitHub Actions migration guide, now at a new URL under the Actions tutorials section. ([commit](https://github.com/github/docs/commit/bb615bcf16807083bad6ffe988864a5d5a061885))\n- The new guide focuses on AI-assisted, wave-based migration from Jenkins, Azure DevOps, GitLab CI/CD, or CircleCI. ([docs](https://docs.github.com/en/actions/tutorials/migrate-to-github-actions/migrate-an-enterprise))\n- There are no breaking changes, deprecations, or security updates.\n\n### Action required\nNothing this time.\n\nOld URLs for the enterprise migration guide (under `/admin/...` and `/enterprise-onboarding/...`) redirect to the new page. Updating internal links is optional. ([docs](https://docs.github.com/en/actions/tutorials/migrate-to-github-actions/migrate-an-enterprise))\n\n### Security improvements\nNothing this time.\n\n### Docs changes worth reading\n- **New page: \"Migrating your enterprise to GitHub Actions\"** ([docs](https://docs.github.com/en/actions/tutorials/migrate-to-github-actions/migrate-an-enterprise), [commit](https://github.com/github/docs/commit/bb615bcf16807083bad6ffe988864a5d5a061885))\n  - The guide was moved from the admin/enterprise-onboarding docs to `actions/tutorials/migrate-to-github-actions/`. It applies to Free/Pro/Team, GHEC, and GHES.\n  - It is aimed at administrators migrating many pipelines from Jenkins, Azure DevOps, GitLab CI/CD, or CircleCI.\n  - It now frames migration as an AI-assisted process run in waves, \"without disrupting delivery.\" It aims to produce:\n    - a target design that improves on the current setup\n    - a live inventory of which repos use which CI/CD system and how far each has migrated\n    - a pilot group plus plans for later waves\n    - AI tooling to convert pipeline syntax to your organization's standards\n    - a plan to retire the old CI/CD system\n  - The guide references an `actions-migrations-via-copilot` resource. The provided diff is truncated at that point, so details about that tooling aren't available here.\n  - **Security note:** teams using AI-assisted pipeline conversion should review the generated workflows before adopting them. Check `permissions`, secret handling, and third-party action pinning.\n- **Migration tutorials index updated:** the new \"Migrate an enterprise\" page is listed first, ahead of the automated and manual migration pages. ([docs](https://docs.github.com/en/actions/tutorials/migrate-to-github-actions))",
+  "note": null,
+  "changelog": [],
+  "docs": [
+    {
+      "sha": "bb615bcf16807083bad6ffe988864a5d5a061885",
+      "title": "Rewrite the enterprise Actions migration guide (#64788)",
+      "url": "https://github.com/github/docs/commit/bb615bcf16807083bad6ffe988864a5d5a061885",
+      "date": "2026-11-27T14:22:31Z",
+      "files": [
+        {
+          "path": "content/actions/tutorials/migrate-to-github-actions/index.md",
+          "status": "modified",
+          "url": "https://docs.github.com/en/actions/tutorials/migrate-to-github-actions",
+          "additions": 1,
+          "deletions": 0,
+          "patch": "@@ -12,6 +12,7 @@ redirect_from:\n   - /actions/how-tos/migrating-to-github-actions\n   - /actions/tutorials/migrating-to-github-actions\n children:\n+  - /migrate-an-enterprise\n   - /automated-migrations\n   - /manual-migrations\n contentType: tutorials"
+        },
+        {
+          "path": "content/actions/tutorials/migrate-to-github-actions/migrate-an-enterprise.md",
+          "status": "added",
+          "url": "https://docs.github.com/en/actions/tutorials/migrate-to-github-actions/migrate-an-enterprise",
+          "additions": 148,
+          "deletions": 0,
+          "patch": "@@ -0,0 +1,148 @@\n+---\n+title: Migrating your enterprise to GitHub Actions\n+shortTitle: Migrate an enterprise\n+intro: Plan and run an AI-assisted migration from your existing CI/CD system to {% data variables.product.prodname_actions %}, moving repositories in waves without disrupting delivery.\n+versions:\n+  fpt: '*'\n+  ghec: '*'\n+  ghes: '*'\n+redirect_from:\n+  - /admin/github-actions/getting-started-with-github-actions-for-your-enterprise/migrating-your-enterprise-to-github-actions\n+  - /enterprise-onboarding/github-actions-for-your-enterprise/migrating-your-enterprise-to-github-actions\n+  - /admin/managing-github-actions-for-your-enterprise/getting-started-with-github-actions-for-your-enterprise/migrating-your-enterprise-to-github-actions\n+contentType: tutorials\n+category:\n+  - Migrate to GitHub Actions\n+---\n+\n+## Introduction\n+\n+This guide is for administrators who are migrating many pipelines from an existing CI/CD system, such as Jenkins, Azure DevOps, GitLab CI/CD, or CircleCI, to {% data variables.product.prodname_actions %}.\n+\n+By the end of this guide, you'll have:\n+\n+* A target design that improves on your current setup\n+* A live inventory of which repositories use which CI/CD system, and how far each one has migrated\n+* A pilot migration group and a plan for future migration waves\n+* AI tooling for converting pipeline syntax to your organization's standards\n+* A plan for retiring the old CI/CD system\n+\n+This guide draws on [actions-migrations-via-copilot](https://g"
+        }
+      ]
+    }
+  ],
+  "generated_at": "2026-11-28T09:44:16.166217+00:00"
+}
